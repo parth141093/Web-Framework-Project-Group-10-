@@ -28,7 +28,7 @@ mongoose.connect(dbURI)
 
 
 
-// Create Data Entry
+// Create data Entry
 app.post('/add-foods', async (req, res) => {
     const { name, description, ingredients, how_to_make, type_of_food,nationality,picture } = req.body;
 
@@ -59,6 +59,7 @@ app.delete('/delete-food/:id', async (req, res) => {
     res.json(deletedFood);
 });
 
+<<<<<<< HEAD
 //Get Food info
 
 const getAll = async () =>{
@@ -90,4 +91,22 @@ app.get('/foods/:id', async (req,res) => {
     const id = req.params.id;
     const food = await Food.findById(id);
     res.json(food);
+=======
+// Update data
+app.patch('/update-food/:id', async (req, res) => {
+    try {
+        const { name, description, ingredients, how_to_make, type_of_food, nationality, picture } = req.body;
+        if (!name) {
+            return res.status(400).json({ error: "Name of food is required"});
+        }
+        const food = await Food.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        if (!food) {
+            return res.status(404).json({ error: "Food not found"});
+        }
+        res.json(food);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: "Internal Server Error"});
+    }
+>>>>>>> da5c8e443bce352c7bca0f17b0da3dd728a0a490
 });
