@@ -90,6 +90,7 @@ app.get('/foods/:id', async (req,res) => {
     const id = req.params.id;
     const food = await Food.findById(id);
     res.json(food);
+});
 // Update data
 app.patch('/update-food/:id', async (req, res) => {
     try {
