@@ -58,3 +58,36 @@ app.delete('/delete-food/:id', async (req, res) => {
     const deletedFood = await Food.findByIdAndDelete(id);
     res.json(deletedFood);
 });
+
+//Get Food info
+
+const getAll = async () =>{
+    try
+    {
+        const result = await Food.find();
+        console.log(result);
+    }
+    catch (error)
+    {
+        console.log(error);
+    }
+}
+//getAll();
+
+app.get('/foods', async (req,res) => {
+    try
+    {
+        const result = await Food.find();
+        res.json(result);
+    }
+    catch (error)
+    {
+        console.log(error);
+    }
+});
+
+app.get('/foods/:id', async (req,res) => {
+    const id = req.params.id;
+    const food = await Food.findById(id);
+    res.json(food);
+});
