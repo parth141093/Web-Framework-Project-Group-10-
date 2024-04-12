@@ -59,7 +59,6 @@ app.delete('/delete-food/:id', async (req, res) => {
     res.json(deletedFood);
 });
 
-<<<<<<< HEAD
 //Get Food info
 
 const getAll = async () =>{
@@ -91,7 +90,8 @@ app.get('/foods/:id', async (req,res) => {
     const id = req.params.id;
     const food = await Food.findById(id);
     res.json(food);
-=======
+    
+});
 // Update data
 app.patch('/update-food/:id', async (req, res) => {
     try {
@@ -108,5 +108,4 @@ app.patch('/update-food/:id', async (req, res) => {
         console.error(error);
         res.status(500).json({error: "Internal Server Error"});
     }
->>>>>>> da5c8e443bce352c7bca0f17b0da3dd728a0a490
 });
