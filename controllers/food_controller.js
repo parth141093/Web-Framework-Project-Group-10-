@@ -14,7 +14,17 @@ const getHome = (req, res) => {
 };
 
 //list all food
-
+const getAllFood = async (req, res) => {
+    try{
+        const foods = await food_model.find();
+        res.render('allFood', {
+            tilte: "Eat what today?",
+            foods: foods.map(doc => doc.toJSON())
+        })
+    } catch (error) {
+        console.log(error);
+    }
+};
 //get 1 food details
 
 //add a food
@@ -24,4 +34,4 @@ const getHome = (req, res) => {
 
 //update
 
-module.exports = {getHome, getFoodDetails};
+module.exports = {getHome, getAllFood};
