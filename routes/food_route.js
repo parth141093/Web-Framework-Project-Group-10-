@@ -6,4 +6,6 @@ router.get('/', food_controller.getHome);
 
 router.get('/get-all', food_controller.getAllFood);
 
+router.put('/update/:id', food_controller.updateFood);
+
 module.exports = router;
