@@ -6,7 +6,9 @@ router.get('/', food_controller.getHome);
 
 router.get('/get-all', food_controller.getAllFood);
 
-router.put('/update/:id', food_controller.updateFood);
+router.get('/updateFood', food_controller.getUpdateFoodPage);
+
+router.post('/update', food_controller.updateFood);
 
 router.get('/add-food-page', food_controller.getAddFoodPage);
 

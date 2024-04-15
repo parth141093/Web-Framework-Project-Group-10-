@@ -9,24 +9,28 @@
 </head>
 <body>
     <h1>Update Food Item</h1>
-    <form action="/update/{{ this._id }}" method="POST">
+    <form action="/update" method="POST">
+
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id"">
+
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" value="{{ this.name }}" required><br>
+        <input type="text" id="name" name="name"><br>
         
         <label for="description">Description:</label>
-        <input type="text" id="description" name="description" value="{{ this.description }}" required><br>
+        <input type="text" id="description" name="description"><br>
         
         <label for="ingredients">Ingredients:</label>
-        <textarea id="ingredients" name="ingredients" rows="4" cols="50" required>{{ this.ingredients }}</textarea><br>
+        <textarea id="ingredients" name="ingredients" rows="4" cols="50"</textarea><br>
         
         <label for="how_to_make">How to Make:</label>
-        <textarea id="how_to_make" name="how_to_make" rows="4" cols="50" required>{{ food.how_to_make }}</textarea><br>
+        <textarea id="how_to_make" name="how_to_make" rows="4" cols="50"</textarea><br>
         
         <label for="type_of_food">Type of Food:</label>
-        <input type="text" id="type_of_food" name="type_of_food" value="{{ this.type_of_food }}" required><br>
+        <input type="text" id="type_of_food" name="type_of_food" value="><br>
         
         <label for="nationality">Nationality:</label>
-        <input type="text" id="nationality" name="nationality" value="{{ this.nationality }}" required><br>
+        <input type="text" id="nationality" name="nationality"><br>
         
         <button type="submit">Update Food</button>
     </form>

@@ -69,23 +69,37 @@ const deleteFood = async (req, res) => {
 
 //update
 
-const updateFood = async (req, res) => {
-    const { id } = req.params; 
-    const { name, description, ingredients, how_to_make, type_of_food, nationality } = req.body; 
-
-    try {
-        // Find the food item by id and update it
-        const updatedFood = await food_model.findByIdAndUpdate(id, { name, description, ingredients, how_to_make, type_of_food, nationality }, { new: true });
-
-        if (!updatedFood) {
-            return res.status(404).send('Food item not found');
-        }
-
-        res.send('Food item updated successfully');
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Internal Server Error');
-    }
+const getUpdateFoodPage = (req, res) => {
+    res.render('updateFood');
 };
 
-module.exports = {getHome, getAllFood, updateFood, getAddFoodPage, postFood,getDelFoodPage, deleteFood};
+const updateFood = async (req, res) => {
+    try {
+        const newFood = new food_model(req.body);
+        await newFood.save();
+        res.send("<h1>Food Added</h1>");
+    } catch (error) {
+        res.status(500).send("Error adding food: " + error.message);
+    }
+};
+// const updateFood = async (req, res) => {
+//     res.render('updateFood');
+//     const { id } = req.params; 
+//     const { name, description, ingredients, how_to_make, type_of_food, nationality } = req.body; 
+
+//     try {
+//         // Find the food item by id and update it
+//         const updatedFood = await food_model.findByIdAndUpdate(id, { name, description, ingredients, how_to_make, type_of_food, nationality }, { new: true });
+
+//         if (!updatedFood) {
+//             return res.status(404).send('Food item not found');
+//         }
+
+//         res.send('Food item updated successfully');
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).send('Internal Server Error');
+//     }
+// };
+
+module.exports = {getHome, getAllFood, updateFood, getAddFoodPage, postFood,getDelFoodPage, deleteFood, getUpdateFoodPage};
