@@ -2,29 +2,19 @@ const express = require('express');
 const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
 require('dotenv').config();
-const bodyParser = require('body-parser');
 
 const app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use('',require('./routes/food_route'));
 
-const dbURI = 'mongodb+srv://'+process.env.DBUSERNAME+':'
-+process.env.DBPASSWORD+'@'+process.env.CLUSTER+'.mongodb.net/'
-+process.env.DB+'?retryWrites=true&w=majority';
+app.engine('handlebars', exphbs.engine({
+    defaultLayout: 'main'
+}));
 
-const Food = require('./models/food_model');
+app.set('view engine', 'handlebars');
 
-mongoose.connect(dbURI)
-.then((result) => 
-{
-    console.log('Connected to DB');
-    const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => console.log("Listening on " + PORT));
-})
-.catch((err) => {
-    console.log(err);
-})
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`App listening to port ${PORT}`));
 
 
 /*
