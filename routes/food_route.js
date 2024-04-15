@@ -12,4 +12,8 @@ router.get('/add-food-page', food_controller.getAddFoodPage);
 
 router.post('/foods', food_controller.postFood);
 
+router.get('/remove-food', food_controller.getDelFoodPage)
+
+router.post('/delete', food_controller.deleteFood);
+
 module.exports = router;
