@@ -4,4 +4,6 @@ const router = express.Router();
 
 router.get('/', food_controller.getHome );
 
+router.get('/foods/:id', food_controller.getFoodDetails);
+
 module.exports = router;
