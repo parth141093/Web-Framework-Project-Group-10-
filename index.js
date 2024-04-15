@@ -4,6 +4,7 @@ const exphbs = require('express-handlebars');
 require('dotenv').config();
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 
 app.use('',require('./routes/food_route'));
 

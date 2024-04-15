@@ -8,7 +8,7 @@ const foodSchema = new mongoose.Schema({
     type_of_food: String,
     nationality: String,
     picture: String
-}, { collection: 'food_info' }); // Specify the collection name explicitly
+}, { collection: 'food_info' }); // Specified Collection
 
 const Food = mongoose.model('Food', foodSchema);
 

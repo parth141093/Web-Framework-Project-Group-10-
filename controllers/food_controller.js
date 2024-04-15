@@ -2,6 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+const app = express();
+
+app.use(express.urlencoded({ extended: true }));
+
 const dbURI = 'mongodb+srv://'+process.env.DBUSERNAME+':'+process.env.DBPASSWORD+'@'+process.env.CLUSTER+'.mongodb.net/'+process.env.DB+'?retryWrites=true&w=majority';
 mongoose.connect(dbURI);
 const food_model = require('../models/food_model');
@@ -29,6 +33,20 @@ const getAllFood = async (req, res) => {
 
 //add a food
 
+const getAddFoodPage = (req, res) => {
+    res.render('add-food-page');
+};
+
+const postFood = async (req, res) => {
+    try {
+        const newFood = new food_model(req.body);
+        await newFood.save();
+        res.send("<h1>Food Added</h1>");
+    } catch (error) {
+        res.status(500).send("Error adding food: " + error.message);
+    }
+};
+
 
 //delete
 
@@ -53,4 +71,4 @@ const updateFood = async (req, res) => {
     }
 };
 
-module.exports = {getHome, getAllFood, updateFood};
+module.exports = {getHome, getAllFood, updateFood, getAddFoodPage, postFood};

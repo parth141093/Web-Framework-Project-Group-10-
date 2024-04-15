@@ -8,4 +8,8 @@ router.get('/get-all', food_controller.getAllFood);
 
 router.put('/update/:id', food_controller.updateFood);
 
+router.get('/add-food-page', food_controller.getAddFoodPage);
+
+router.post('/foods', food_controller.postFood);
+
 module.exports = router;
