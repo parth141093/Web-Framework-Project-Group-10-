@@ -13,7 +13,7 @@ const dbURI = 'mongodb+srv://'+process.env.DBUSERNAME+':'
 +process.env.DBPASSWORD+'@'+process.env.CLUSTER+'.mongodb.net/'
 +process.env.DB+'?retryWrites=true&w=majority';
 
-const Food = require('./models/food.model');
+const Food = require('./models/food_model');
 
 mongoose.connect(dbURI)
 .then((result) => 
@@ -27,7 +27,7 @@ mongoose.connect(dbURI)
 })
 
 
-
+/*
 // Create data Entry
 app.post('/add-foods', async (req, res) => {
     const { name, description, ingredients, how_to_make, type_of_food,nationality,picture } = req.body;
@@ -109,3 +109,4 @@ app.patch('/update-food/:id', async (req, res) => {
         res.status(500).json({error: "Internal Server Error"});
     }
 });
+*/
