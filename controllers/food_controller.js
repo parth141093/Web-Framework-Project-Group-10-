@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const dbURI = 'mongodb+srv://'+process.env.DBUSERNAME+':'+process.env.DBPASSWORD+'@'+process.env.CLUSTER+'.mongodb.net/'+process.env.DB+'?retryWrites=true&w=majority';
 mongoose.connect(dbURI);
-const Food = require('../models/food_model');
+const food_model = require('../models/food_model');
 
 
 
@@ -16,19 +16,6 @@ const getHome = (req, res) => {
 //list all food
 
 //get 1 food details
-const getFoodDetails = async (req,res) => {
-    try {
-        const foodId = req.params.id;
-        const food = await Food.findById(foodId);
-        res.render('index', {
-            food : food.toJSON()
-        });
-    } catch (err) {
-        res.status(404).json({
-            msg: "not found"
-        });
-    }
-};
 
 //add a food
 
