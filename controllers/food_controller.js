@@ -22,11 +22,16 @@ const getAllFood = async (req, res) => {
     try{
         const foods = await food_model.find();
         res.render('allFood', {
-            tilte: "Eat what today?",
-            foods: foods.map(doc => doc.toJSON())
+            title: "Eat what today?",
+            foods: foods.map(doc => {
+                const food = doc.toJSON();
+                food.imageUrl = `/assets/images/${food.picture}.png`;
+                return food;
+            })
         })
     } catch (error) {
         console.log(error);
+        res.status(500).send("Internal Server Error");
     }
 };
 //get 1 food details
@@ -102,4 +107,4 @@ const updateFood = async (req, res) => {
 //     }
 // };
 
-module.exports = {getHome, getAllFood, updateFood, getAddFoodPage, postFood,getDelFoodPage, deleteFood, getUpdateFoodPage};
+module.exports = {getHome, getAllFood, updateFood, getAddFoodPage, postFood, getDelFoodPage, deleteFood, getUpdateFoodPage};
