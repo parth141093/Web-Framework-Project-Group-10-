@@ -13,7 +13,7 @@ const dbURI = 'mongodb+srv://'+process.env.DBUSERNAME+':'
 +process.env.DBPASSWORD+'@'+process.env.CLUSTER+'.mongodb.net/'
 +process.env.DB+'?retryWrites=true&w=majority';
 
-const Food = require('./models/Food');
+const Food = require('./models/food.model');
 
 mongoose.connect(dbURI)
 .then((result) => 
