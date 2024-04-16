@@ -1,28 +1,18 @@
 <h1>{{title}}</h1>
+
 <div class="food-cards">
     {{#each foods}}
-    <div class="food-card">
-        <h2>{{this.name}}</h2>
-        <p>{{this.description}}</p>
-        <p>Ingredients</p>
-        <ul>
-            {{#each this.ingredients}}
-            <li>{{this}}</li>
-            {{/each}}
-        </ul>
-        <p>How to make?</p>
-        <ol>
-            {{#each this.how_to_make}}
-            {{#if @first}}
-            {{else}}
-            {{/if}}
-            <li>{{this}}</li>
-            {{/each}}
-        </ol>
-        <p>Type of Food: {{this.type_of_food}}</p>
-        <p>Nationality: {{this.nationality}}</p>
-        <img src="{{this.imageUrl}}" alt="{{this.name}}">
-    </div>
+    <a href="/food/{{this._id}}" class="food-card-link">
+        <div class="food-card">
+            <div class="card-img">
+                <img src="{{this.imageUrl}}" alt="{{this.name}}" style="max-width: 400px; max-height: 400px;">
+            </div>
+            </div>
+            <div class="card-content">
+                <h2>{{this.name}}</h2>
+                <p>{{this.description}}</p>
+            </div>
+        </div>
+    </a>
     {{/each}}
 </div>
-

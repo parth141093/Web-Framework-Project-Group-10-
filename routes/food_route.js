@@ -8,6 +8,8 @@ router.get('/food', food_controller.getAllFood);
 
 router.get('/food/type/:type_of_food', food_controller.getAllFoodByType);
 
+router.get('/food/:id', food_controller.getFoodById);
+
 router.get('/food/update', food_controller.getUpdateFoodPage);
 
 router.post('/update', food_controller.updateFood);

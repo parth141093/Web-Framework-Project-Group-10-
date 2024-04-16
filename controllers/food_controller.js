@@ -53,6 +53,21 @@ const getAllFoodByType = async (req, res) => {
     }
 };
 
+//get a food details by id
+const getFoodById = async (req, res) => {
+    try{
+        const foodId = req.params.id;
+        const food = await food_model.findById(foodId);
+        const foodData = food.toJSON();
+        foodData.imageUrl = `/assets/images/${foodData.picture}.png`;
+
+        res.render('foodById', { food: foodData });
+    }catch(error){
+        console.error(error);
+        res.status(500).json({error:"Internal Server Error"});
+    }
+};
+
 //add a food
 
 const getAddFoodPage = (req, res) => {
@@ -117,4 +132,4 @@ const updateFood = async (req, res) => {
     }
 };
 
-module.exports = {getHome, getAllFood, getAllFoodByType, updateFood, getAddFoodPage, postFood, getDelFoodPage, deleteFood, getUpdateFoodPage};
+module.exports = {getHome, getAllFood, getAllFoodByType, getFoodById, updateFood, getAddFoodPage, postFood, getDelFoodPage, deleteFood, getUpdateFoodPage};

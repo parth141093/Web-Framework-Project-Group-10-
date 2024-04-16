@@ -2,11 +2,17 @@
 
 <div class="food-cards">
     {{#each foods}}
-    <div class="food-card">
-        <h2>{{this.name}}</h2>
-        <p>{{this.description}}</p>
-        <img src="{{this.imageUrl}}" alt="{{this.name}}">
-        <a href="/food/{{this._id}}">View Details</a>
-    </div>
+    <a href="/food/{{this._id}}" class="food-card-link">
+        <div class="food-card">
+            <div class="card-img">
+                <img src="{{this.imageUrl}}" alt="{{this.name}}" style="max-width: 400px; max-height: 400px;">
+            </div>
+            </div>
+            <div class="card-content">
+                <h2>{{this.name}}</h2>
+                <p>{{this.description}}</p>
+            </div>
+        </div>
+    </a>
     {{/each}}
 </div>
