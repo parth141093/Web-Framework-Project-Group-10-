@@ -32,7 +32,26 @@ const getAllFood = async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 };
-//get 1 food details
+
+//list all food by type
+const getAllFoodByType = async (req, res) => {
+    try {
+        const type_of_food = req.params.type_of_food;
+        const foods = await food_model.find({ type_of_food: type_of_food });
+        res.render('allFoodByType', {
+            title: `Food Items - ${type_of_food}`,
+            foods: foods.map(doc => {
+                const food = doc.toJSON();
+                food.imageUrl = `/assets/images/${food.picture}.png`;
+                return food;
+                
+            })
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Internal Server Error");
+    }
+};
 
 //add a food
 
@@ -93,4 +112,4 @@ const getUpdateFoodPage = (req, res) => {
     res.render('updateFood');
 };
 
-module.exports = {getHome, getAllFood, updateFood, getAddFoodPage, postFood, getDelFoodPage, deleteFood, getUpdateFoodPage};
+module.exports = {getHome, getAllFood, getAllFoodByType, updateFood, getAddFoodPage, postFood, getDelFoodPage, deleteFood, getUpdateFoodPage};

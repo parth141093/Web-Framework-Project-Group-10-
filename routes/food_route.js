@@ -4,17 +4,19 @@ const router = express.Router();
 
 router.get('/', food_controller.getHome);
 
-router.get('/get-all', food_controller.getAllFood);
+router.get('/food', food_controller.getAllFood);
 
-router.get('/updateFood', food_controller.getUpdateFoodPage);
+router.get('/food/type/:type_of_food', food_controller.getAllFoodByType);
+
+router.get('/food/update', food_controller.getUpdateFoodPage);
 
 router.patch('/updateFood/name', food_controller.updateFood);
 
-router.get('/add-food-page', food_controller.getAddFoodPage);
+router.get('/food/add', food_controller.getAddFoodPage);
 
 router.post('/foods', food_controller.postFood);
 
-router.get('/remove-food', food_controller.getDelFoodPage)
+router.get('/food/remove', food_controller.getDelFoodPage)
 
 router.post('/delete', food_controller.deleteFood);
 

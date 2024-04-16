@@ -10,6 +10,7 @@ app.engine('handlebars', exphbs.engine({
     defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views'));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use(express.json());
 app.use(express.static('public'));

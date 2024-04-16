@@ -1,0 +1,12 @@
+<h1>{{title}}</h1>
+
+<div class="food-cards">
+    {{#each foods}}
+    <div class="food-card">
+        <h2>{{this.name}}</h2>
+        <p>{{this.description}}</p>
+        <img src="{{this.imageUrl}}" alt="{{this.name}}">
+        <a href="/food/{{this._id}}">View Details</a>
+    </div>
+    {{/each}}
+</div>
