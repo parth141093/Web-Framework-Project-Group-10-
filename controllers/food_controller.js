@@ -74,36 +74,30 @@ const deleteFood = async (req, res) => {
 
 //update
 
-const updateFood = async (req, res) => {
-    const { name, description, ingredients, how_to_make, type_of_food, nationality } = req.body; 
-
-    try {
-        // Find the food item by name and update it
-        const updatedFood = await food_model.findOneAndUpdate({ name }, { name, description, ingredients, how_to_make, type_of_food, nationality }, { new: true });
-
-        if (!updatedFood) {
-            return res.status(404).send('Food item not found');
-        }
-
-        res.send('Food item updated successfully');
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Internal Server Error');
-    }
-};
 const getUpdateFoodPage = (req, res) => {
     res.render('updateFood');
 };
 
+const updateFood = async (req, res) => {
+    try {
+        const { name, description, ingredients, how_to_make, type_of_food, nationality, picture } = req.body;
+        if (!name) {
+            return res.status(400).json({ error: "Name of food is required"});
+        }
 
-// const updateFood = async (req, res) => {
-//     try {
-//         const newFood = new food_model(req.body);
-//         await newFood.save();
-//         res.send("<h1>Food Added</h1>");
-//     } catch (error) {
-//         res.status(500).send("Error adding food: " + error.message);
-//     }
-// };
+        const updatedFields = { name, description, ingredients, how_to_make, type_of_food, nationality, picture };
 
-module.exports = {getHome, getAllFood, updateFood, getAddFoodPage, postFood, getDelFoodPage, deleteFood, getUpdateFoodPage};
+        const food = await food_model.findByIdAndUpdate(req.body.id, updatedFields, { new: true });
+
+        if (!food) {
+            return res.status(404).json({ error: "Food not found"});
+        }
+        
+        res.send("<h1>Food Added</h1>");
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error"});
+    }
+};
+
+module.exports = {getHome, getAllFood,updateFood, getAddFoodPage, postFood, getDelFoodPage, deleteFood, getUpdateFoodPage};

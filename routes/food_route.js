@@ -8,7 +8,7 @@ router.get('/get-all', food_controller.getAllFood);
 
 router.get('/updateFood', food_controller.getUpdateFoodPage);
 
-router.patch('/updateFood/name', food_controller.updateFood);
+router.post('/update', food_controller.updateFood);
 
 router.get('/add-food-page', food_controller.getAddFoodPage);
 
