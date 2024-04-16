@@ -5,6 +5,7 @@ const path = require('path');
 require('dotenv').config();
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 app.use('',require('./routes/food_route'));
 app.engine('handlebars', exphbs.engine({
     defaultLayout: 'main'
