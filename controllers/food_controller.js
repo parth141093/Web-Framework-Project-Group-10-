@@ -79,31 +79,33 @@ const getUpdateFoodPage = (req, res) => {
 };
 
 const updateFood = async (req, res) => {
+    res.render('updateFood');
+    const { id } = req.body._id; 
+    const { name, description, ingredients, how_to_make, type_of_food, nationality } = req.body; 
+
     try {
-        const newFood = new food_model(req.body);
-        await newFood.save();
-        res.send("<h1>Food Added</h1>");
+        // Find the food item by id and update it
+        const updatedFood = await food_model.findByIdAndUpdate(id, { name, description, ingredients, how_to_make, type_of_food, nationality }, { new: true });
+
+        if (!updatedFood) {
+            return res.status(404).send('Food item not found');
+        }
+
+        res.send('Food item updated successfully');
     } catch (error) {
-        res.status(500).send("Error adding food: " + error.message);
+        console.log(error);
+        res.status(500).send('Internal Server Error');
     }
 };
+
+
 // const updateFood = async (req, res) => {
-//     res.render('updateFood');
-//     const { id } = req.params; 
-//     const { name, description, ingredients, how_to_make, type_of_food, nationality } = req.body; 
-
 //     try {
-//         // Find the food item by id and update it
-//         const updatedFood = await food_model.findByIdAndUpdate(id, { name, description, ingredients, how_to_make, type_of_food, nationality }, { new: true });
-
-//         if (!updatedFood) {
-//             return res.status(404).send('Food item not found');
-//         }
-
-//         res.send('Food item updated successfully');
+//         const newFood = new food_model(req.body);
+//         await newFood.save();
+//         res.send("<h1>Food Added</h1>");
 //     } catch (error) {
-//         console.log(error);
-//         res.status(500).send('Internal Server Error');
+//         res.status(500).send("Error adding food: " + error.message);
 //     }
 // };
 
