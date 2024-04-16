@@ -4,8 +4,6 @@ require('dotenv').config();
 
 const app = express();
 
-app.use(express.urlencoded({ extended: true }));
-
 const dbURI = 'mongodb+srv://'+process.env.DBUSERNAME+':'+process.env.DBPASSWORD+'@'+process.env.CLUSTER+'.mongodb.net/'+process.env.DB+'?retryWrites=true&w=majority';
 mongoose.connect(dbURI);
 const food_model = require('../models/food_model');
@@ -95,9 +93,19 @@ const updateFood = async (req, res) => {
         
         res.send("<h1>Food Added</h1>");
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Internal Server Error"});
+        console.log(error);
+        res.status(500).send('Internal Server Error');
     }
 };
+
+// const updateFood = async (req, res) => {
+//     try {
+//         const newFood = new food_model(req.body);
+//         await newFood.save();
+//         res.send("<h1>Food Added</h1>");
+//     } catch (error) {
+//         res.status(500).send("Error adding food: " + error.message);
+//     }
+// };
 
 module.exports = {getHome, getAllFood,updateFood, getAddFoodPage, postFood, getDelFoodPage, deleteFood, getUpdateFoodPage};
