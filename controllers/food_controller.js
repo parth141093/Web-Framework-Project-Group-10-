@@ -98,14 +98,4 @@ const updateFood = async (req, res) => {
     }
 };
 
-// const updateFood = async (req, res) => {
-//     try {
-//         const newFood = new food_model(req.body);
-//         await newFood.save();
-//         res.send("<h1>Food Added</h1>");
-//     } catch (error) {
-//         res.status(500).send("Error adding food: " + error.message);
-//     }
-// };
-
-module.exports = {getHome, getAllFood,updateFood, getAddFoodPage, postFood, getDelFoodPage, deleteFood, getUpdateFoodPage};
+module.exports = {getHome, getAllFood, updateFood, getAddFoodPage, postFood, getDelFoodPage, deleteFood, getUpdateFoodPage};
