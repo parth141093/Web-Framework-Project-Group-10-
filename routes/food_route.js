@@ -10,7 +10,7 @@ router.get('/food/type/:type_of_food', food_controller.getAllFoodByType);
 
 router.get('/food/update', food_controller.getUpdateFoodPage);
 
-router.patch('/updateFood/name', food_controller.updateFood);
+router.post('/update', food_controller.updateFood);
 
 router.get('/food/add', food_controller.getAddFoodPage);
 

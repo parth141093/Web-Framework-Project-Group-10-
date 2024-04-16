@@ -91,25 +91,30 @@ const deleteFood = async (req, res) => {
 
 //update
 
+const getUpdateFoodPage = (req, res) => {
+    res.render('updateFood');
+};
+
 const updateFood = async (req, res) => {
-    const { name, description, ingredients, how_to_make, type_of_food, nationality } = req.body; 
-
     try {
-        // Find the food item by name and update it
-        const updatedFood = await food_model.findOneAndUpdate({ name }, { name, description, ingredients, how_to_make, type_of_food, nationality }, { new: true });
-
-        if (!updatedFood) {
-            return res.status(404).send('Food item not found');
+        const { name, description, ingredients, how_to_make, type_of_food, nationality, picture } = req.body;
+        if (!name) {
+            return res.status(400).json({ error: "Name of food is required"});
         }
 
-        res.send('Food item updated successfully');
+        const updatedFields = { name, description, ingredients, how_to_make, type_of_food, nationality, picture };
+
+        const food = await food_model.findByIdAndUpdate(req.body.id, updatedFields, { new: true });
+
+        if (!food) {
+            return res.status(404).json({ error: "Food not found"});
+        }
+        
+        res.send("<h1>Food Added</h1>");
     } catch (error) {
         console.log(error);
         res.status(500).send('Internal Server Error');
     }
-};
-const getUpdateFoodPage = (req, res) => {
-    res.render('updateFood');
 };
 
 module.exports = {getHome, getAllFood, getAllFoodByType, updateFood, getAddFoodPage, postFood, getDelFoodPage, deleteFood, getUpdateFoodPage};
