@@ -34,3 +34,13 @@
         <img src="/assets/images/{{ food.picture }}.png" alt="{{ food.name }}">
     </div>
 </div>
+<!-- Update Button -->
+<form action="/food/update/{{food._id}}" method="get">
+    <button type="submit">Update</button>
+</form>
+
+<!-- Delete Button -->
+<form action="/food/delete/{{food._id}}" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <button type="submit">Delete</button>
+</form>

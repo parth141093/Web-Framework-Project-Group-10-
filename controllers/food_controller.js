@@ -87,28 +87,44 @@ const postFood = async (req, res) => {
 
 //delete
 
-const getDelFoodPage = (req, res) => {
-    res.render('remove-food');
-};
+// const getDelFoodPage = (req, res) => {
+//     res.render('remove-food');
+// };
+
+// const deleteFood = async (req, res) => {
+//     const {_id} = req.body;
+//     try {
+//         const deletedFood = await food_model.findByIdAndDelete(_id);
+//         if (!deletedFood) {
+//             return res.status(404).send('Food not found');
+//         }
+//         res.send("<h1>Food Deleted</h1>");
+//     } catch (error) {
+//         res.status(500).send("Error deleting food: " + error.message);
+//     }
+// }
 
 const deleteFood = async (req, res) => {
-    const {_id} = req.body;
     try {
-        const deletedFood = await food_model.findByIdAndDelete(_id);
-        if (!deletedFood) {
-            return res.status(404).send('Food not found');
-        }
-        res.send("<h1>Food Deleted</h1>");
+        const result = await food_model.findByIdAndDelete(req.params.id);
+        res.send("Food deleted successfully");
     } catch (error) {
-        res.status(500).send("Error deleting food: " + error.message);
+        res.status(500).send("Failed to delete the food.");
     }
-}
+};
+
 
 //update
 
-const getUpdateFoodPage = (req, res) => {
-    res.render('updateFood');
+const getUpdateFoodPage = async (req, res) => {
+    try {
+        const food = await food_model.findById(req.params.id);
+        res.render('updateFood', { food });
+    } catch (error) {
+        res.status(500).send("Failed to get the food for update.");
+    }
 };
+
 
 const updateFood = async (req, res) => {
     try {
@@ -132,4 +148,4 @@ const updateFood = async (req, res) => {
     }
 };
 
-module.exports = {getHome, getAllFood, getAllFoodByType, getFoodById, updateFood, getAddFoodPage, postFood, getDelFoodPage, deleteFood, getUpdateFoodPage};
+module.exports = {getHome, getAllFood, getAllFoodByType, getFoodById, updateFood, getAddFoodPage, postFood, /*getDelFoodPage,*/ deleteFood, getUpdateFoodPage};
