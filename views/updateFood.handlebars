@@ -1,36 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Food</title>
-</head>
-<body>
-    <h1>Update Food Item</h1>
-    <form action="/updateFood/{{ food._id }}" method="PATCH">
-
-        <label for="id">ID:</label>
-        <input type="text" id="id" name="id" value="{{ food._id }}"><br>
-
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" value="{{ food.name }}"><br>
-        
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description" value="{{ food.description }}"><br>
-        
-        <label for="ingredients">Ingredients:</label>
-        <textarea id="ingredients" name="ingredients" rows="4" cols="50">{{ food.ingredients }}</textarea><br>
-        
-        <label for="how_to_make">How to Make:</label>
-        <textarea id="how_to_make" name="how_to_make" rows="4" cols="50">{{ food.how_to_make }}</textarea><br>
-        
-        <label for="type_of_food">Type of Food:</label>
-        <input type="text" id="type_of_food" name="type_of_food" value="{{ food.type_of_food }}"><br>
-        
-        <label for="nationality">Nationality:</label>
-        <input type="text" id="nationality" name="nationality" value="{{ food.nationality }}"><br>
-        
-        <button type="submit">Update Food</button>
-    </form>
-</body>
-</html>
+<form action="/updateFood/{{ food.name }}" method="PATCH">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="{{ food.name }}" readonly><br>
+    
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" value="{{ food.description }}"><br>
+    
+    <label for="ingredients">Ingredients:</label>
+    <textarea id="ingredients" name="ingredients" rows="4" cols="50">{{ food.ingredients }}</textarea><br>
+    
+    <label for="how_to_make">How to Make:</label>
+    <textarea id="how_to_make" name="how_to_make" rows="4" cols="50">{{ food.how_to_make }}</textarea><br>
+    
+    <label for="type_of_food">Type of Food:</label>
+    <input type="text" id="type_of_food" name="type_of_food" value="{{ food.type_of_food }}"><br>
+    
+    <label for="nationality">Nationality:</label>
+    <input type="text" id="nationality" name="nationality" value="{{ food.nationality }}"><br>
+    
+    <button type="submit">Update Food</button>
+</form>
