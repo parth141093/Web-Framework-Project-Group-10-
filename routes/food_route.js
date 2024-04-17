@@ -26,4 +26,6 @@ router.post('/foods', food_controller.postFood);
 
 router.post('/food/delete/:id', food_controller.deleteFood);
 
+router.get('/foods/search', food_controller.searchFood);
+
 module.exports = router;

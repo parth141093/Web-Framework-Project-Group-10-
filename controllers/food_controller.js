@@ -148,4 +148,21 @@ const updateFood = async (req, res) => {
     }
 };
 
-module.exports = {getHome, getAllFood, getAllFoodByType, getFoodById, updateFood, getAddFoodPage, postFood, /*getDelFoodPage,*/ deleteFood, getUpdateFoodPage};
+// Search Function
+const searchFood = async (req, res) => {
+    const searchTerm = req.query.q;
+
+    try {
+        if (!searchTerm) {
+            return res.render('searchPage');;
+        }
+
+        const foods = await food_model.find({ $text: { $search: searchTerm } });
+        res.render('searchResults', { foods });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+module.exports = {getHome, getAllFood, getAllFoodByType, getFoodById, updateFood, getAddFoodPage, postFood, /*getDelFoodPage,*/ deleteFood, getUpdateFoodPage, searchFood};

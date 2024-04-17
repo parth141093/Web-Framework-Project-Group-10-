@@ -1,0 +1,19 @@
+<h1>Search Results</h1>
+
+{{#if foods.length}}
+  <ul>
+    {{#each foods}}
+      <li>
+        {{#if this.name}}
+          <strong>Name:</strong> {{this.name}}<br>
+        {{/if}}
+        {{#if this.description}}
+          <strong>Description:</strong> {{this.description}}<br>
+        {{/if}}
+      </li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>No results found.</p>
+{{/if}}
+
