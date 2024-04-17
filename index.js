@@ -9,15 +9,17 @@ handlebars.handlebars = handlebars.create({ allowProtoMethodsByDefault: true });
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
-app.engine('handlebars', exphbs.engine({ defaultLayout: 'main', runtimeOptions: {allowProtoMethodsByDefault: true, allowProtoPropertiesByDefault: true} }));
+app.engine('handlebars', exphbs.engine({ 
+    defaultLayout: 'main', 
+    runtimeOptions: {allowProtoMethodsByDefault: true, allowProtoPropertiesByDefault: true},
+    partialsDir: ['views/partials/']
+ }));
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
-// Serve static files before any dynamic routes
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use(express.static('public'));
 
-// Dynamic routes
 app.use('',require('./routes/food_route'));
 app.use('/food', require('./routes/food_route'));
 
