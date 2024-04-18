@@ -84,26 +84,6 @@ const postFood = async (req, res) => {
     }
 };
 
-
-//delete
-
-// const getDelFoodPage = (req, res) => {
-//     res.render('remove-food');
-// };
-
-// const deleteFood = async (req, res) => {
-//     const {_id} = req.body;
-//     try {
-//         const deletedFood = await food_model.findByIdAndDelete(_id);
-//         if (!deletedFood) {
-//             return res.status(404).send('Food not found');
-//         }
-//         res.send("<h1>Food Deleted</h1>");
-//     } catch (error) {
-//         res.status(500).send("Error deleting food: " + error.message);
-//     }
-// }
-
 const deleteFood = async (req, res) => {
     try {
         const result = await food_model.findByIdAndDelete(req.params.id);

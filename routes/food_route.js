@@ -20,10 +20,6 @@ router.get('/food/add', food_controller.getAddFoodPage);
 
 router.post('/foods', food_controller.postFood);
 
-// router.get('/food/remove', food_controller.getDelFoodPage)
-
-// router.post('/delete', food_controller.deleteFood);
-
 router.post('/food/delete/:id', food_controller.deleteFood);
 
 router.get('/foods/search', food_controller.searchFood);
