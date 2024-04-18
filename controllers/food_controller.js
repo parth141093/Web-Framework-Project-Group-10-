@@ -96,16 +96,16 @@ const deleteFood = async (req, res) => {
 
 //update
 
-const getUpdateFoodPage = async (req, res) => {
+const getEditFoodPage = async (req, res) => {
     try {
         const food = await food_model.findById(req.params.id);
-        res.render('updateFood', { food });
+        res.render('editFood', { food });
     } catch (error) {
-        res.status(500).send("Failed to get the food for update.");
+        res.status(500).send("Failed to get the food for edit.");
     }
 };
 
-const updateFood = async (req, res) => {
+const editFood = async (req, res) => {
     try {
         const { id, name, description, ingredients, how_to_make, type_of_food, nationality, picture } = req.body;
         if (!name) {
@@ -128,7 +128,7 @@ const updateFood = async (req, res) => {
             return res.status(404).json({ error: "Food not found"});
         }
         
-        res.send("<h1>Food Updated</h1>");
+        res.send("<h1>Food edited</h1>");
     } catch (error) {
         console.log(error);
         res.status(500).send('Internal Server Error');
@@ -152,4 +152,4 @@ const searchFood = async (req, res) => {
     }
 };
 
-module.exports = {getHome, getAllFood, getAllFoodByType, getFoodById, updateFood, getAddFoodPage, postFood, /*getDelFoodPage,*/ deleteFood, getUpdateFoodPage, searchFood};
+module.exports = {getHome, getAllFood, getAllFoodByType, getFoodById, editFood, getAddFoodPage, postFood, deleteFood, getEditFoodPage, searchFood};

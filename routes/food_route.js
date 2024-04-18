@@ -10,11 +10,9 @@ router.get('/food/type/:type_of_food', food_controller.getAllFoodByType);
 
 router.get('/food/:id', food_controller.getFoodById);
 
-// router.get('/food/update', food_controller.getUpdateFoodPage);
-
-router.post('/update', food_controller.updateFood);
-
-router.get('/food/update/:id', food_controller.getUpdateFoodPage);
+// Edit
+router.get('/food/edit/:id', food_controller.getEditFoodPage);
+router.post('/edit', food_controller.editFood);
 
 router.get('/food/add', food_controller.getAddFoodPage);
 
