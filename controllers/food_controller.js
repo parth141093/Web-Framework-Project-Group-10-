@@ -125,17 +125,24 @@ const getUpdateFoodPage = async (req, res) => {
     }
 };
 
-
 const updateFood = async (req, res) => {
     try {
-        const { name, description, ingredients, how_to_make, type_of_food, nationality, picture } = req.body;
+        const { id, name, description, ingredients, how_to_make, type_of_food, nationality, picture } = req.body;
         if (!name) {
             return res.status(400).json({ error: "Name of food is required"});
         }
 
-        const updatedFields = { name, description, ingredients, how_to_make, type_of_food, nationality, picture };
+        const updatedFields = { name, description, type_of_food, nationality, picture };
 
-        const food = await food_model.findByIdAndUpdate(req.body.id, updatedFields, { new: true });
+        // Convert ingredients and how_to_make to arrays if they are provided as comma-separated strings
+        if (ingredients) {
+            updatedFields.ingredients = ingredients.split(',').map(ingredient => ingredient.trim());
+        }
+        if (how_to_make) {
+            updatedFields.how_to_make = how_to_make.split('\n').map(step => step.trim());
+        }
+
+        const food = await food_model.findByIdAndUpdate(id, updatedFields, { new: true });
 
         if (!food) {
             return res.status(404).json({ error: "Food not found"});
