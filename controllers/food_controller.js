@@ -141,7 +141,7 @@ const updateFood = async (req, res) => {
             return res.status(404).json({ error: "Food not found"});
         }
         
-        res.send("<h1>Food Added</h1>");
+        res.send("<h1>Food Updated</h1>");
     } catch (error) {
         console.log(error);
         res.status(500).send('Internal Server Error');

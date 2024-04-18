@@ -12,7 +12,7 @@ router.get('/food/:id', food_controller.getFoodById);
 
 // router.get('/food/update', food_controller.getUpdateFoodPage);
 
-// router.post('/update', food_controller.updateFood);
+router.post('/update', food_controller.updateFood);
 
 router.get('/food/update/:id', food_controller.getUpdateFoodPage);
 
