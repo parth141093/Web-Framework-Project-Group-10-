@@ -12,7 +12,7 @@ router.get('/food/:id', food_controller.getFoodById);
 
 // Edit
 router.get('/food/edit/:id', food_controller.getEditFoodPage);
-router.post('/edit', food_controller.editFood);
+router.post('/edit/:id', food_controller.editFood);
 
 router.get('/food/add', food_controller.getAddFoodPage);
 

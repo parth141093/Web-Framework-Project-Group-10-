@@ -1,9 +1,13 @@
 
     <h1>Edit food details</h1>
-    <form action="/edit" method="POST">
-
+    <form action="/edit/{{food._id}}" method="POST">
+        <style>
+        #id-container {display: none;}
+        </style>
+        <div id="id-container">
         <label for="id">ID:</label>
-        <input type="text" id="id" name="id"><br>
+        <input type="text" id="id" name="id" value="{{ food._id }}"><br>
+        </div>
 
         <label for="name">Name:</label>
         <input type="text" id="name" name="name"><br>
