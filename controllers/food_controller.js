@@ -19,7 +19,7 @@ const getHome = (req, res) => {
 const getAllFood = async (req, res) => {
     try{
         const foods = await food_model.find();
-        res.render('allFood', {
+        res.render('pages/allFood', {
             title: "Eat what today?",
             foods: foods.map(doc => {
                 const food = doc.toJSON();
