@@ -12,7 +12,7 @@ const food_model = require('../models/food_model');
 
 //Home root
 const getHome = (req, res) => {
-    res.send('Food blog');
+    res.render('pages/index');
 };
 
 //list all food
@@ -38,7 +38,7 @@ const getAllFoodByType = async (req, res) => {
     try {
         const type_of_food = req.params.type_of_food;
         const foods = await food_model.find({ type_of_food: type_of_food });
-        res.render('allFoodByType', {
+        res.render('pages/allFoodByType', {
             title: `Food Items - ${type_of_food}`,
             foods: foods.map(doc => {
                 const food = doc.toJSON();
@@ -61,7 +61,7 @@ const getFoodById = async (req, res) => {
         const foodData = food.toJSON();
         foodData.imageUrl = `/assets/images/${foodData.picture}.png`;
 
-        res.render('foodById', { food: foodData });
+        res.render('pages/foodById', { food: foodData });
     }catch(error){
         console.error(error);
         res.status(500).json({error:"Internal Server Error"});
@@ -145,7 +145,12 @@ const searchFood = async (req, res) => {
         }
 
         const foods = await food_model.find({ $text: { $search: searchTerm } });
-        res.render('searchResults', { foods });
+        const foodsWithImage = foods.map(doc => {
+            const food = doc.toJSON();
+            food.imageUrl = `/assets/images/${food.picture}.png`;
+            return food;
+        });
+        res.render('searchResults', { foods: foodsWithImage });
     } catch (error) {
         console.log(error);
         res.status(500).send('Internal Server Error');

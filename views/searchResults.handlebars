@@ -1,18 +1,24 @@
 <h1>Search Results</h1>
 
 {{#if foods.length}}
-  <ul>
+
+<div class="food-cards">
     {{#each foods}}
-      <li>
-        {{#if this.name}}
-          <strong>Name:</strong> {{this.name}}<br>
-        {{/if}}
-        {{#if this.description}}
-          <strong>Description:</strong> {{this.description}}<br>
-        {{/if}}
-      </li>
+    <a href="/food/{{this._id}}" class="food-card-link">
+        <div class="food-card">
+            <div class="card-img">
+                <img src="{{this.imageUrl}}" alt="{{this.name}}" style="max-width: 400px; max-height: 400px;">
+            </div>
+            </div>
+            <div class="card-content">
+                <h2>{{this.name}}</h2>
+                <p>{{this.description}}</p>
+            </div>
+        </div>
+    </a>
     {{/each}}
-  </ul>
+</div>
+
 {{else}}
   <p>No results found.</p>
 {{/if}}
