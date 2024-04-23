@@ -61,7 +61,6 @@ const getFoodById = async (req, res) => {
                 averageRating: foodItem.averageRating
             };
         });
-
         res.render('pages/foodById', { food: foodData, relatedFoods: relatedFoodsData });
     }catch(error){
         console.error(error);
@@ -83,8 +82,6 @@ const rate = async (req, res) => {
             $push: { ratings: rating },
             $set: { averageRating: averageRating }
         }, { new: true });
-
-        // Redirect to a specific page, e.g., the food details page or home page
         res.redirect(`/food/${id}`);
     } catch (error) {
         res.status(500).json({success: false, message: "Something went wrong!"});
