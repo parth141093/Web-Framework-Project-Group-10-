@@ -1,1 +1,12 @@
 Home page
+
+{{#each highestRatedFood as |food type|}}
+<div>
+  <h2>{{type}} - Highest Rated</h2>
+  <h3>{{food.name}}</h3>
+  <img src="/assets/images/{{food.picture}}.png" alt="Image of {{food.name}}" style="width:200px; height:auto;">
+  <p>{{food.description}}</p>
+  <p>Meal Type: {{type}}</p>
+  <p>Average Rating: {{toFixed food.averageRating 2}}</p>
+</div>
+{{/each}}

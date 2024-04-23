@@ -2,6 +2,7 @@ const express = require('express');
 const food_controller = require('../controllers/food_controller');
 const sendMail = require("../controllers/food_controller");
 const router = express.Router();
+const { addRating } = require('../controllers/food_controller');
 
 router.get('/', food_controller.getHome);
 
@@ -16,6 +17,9 @@ router.post('/food', food_controller.postFood);
 router.get('/food', food_controller.getAllFood);
 router.get('/food/type/:type_of_food', food_controller.getAllFoodByType);
 router.get('/food/:id', food_controller.getFoodById);
+
+// Rate
+router.post('/food/:id/rate', food_controller.rate);
 
 // Edit
 router.get('/food/edit/:id', food_controller.getEditFoodPage);

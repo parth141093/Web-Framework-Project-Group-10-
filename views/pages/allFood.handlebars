@@ -1,4 +1,4 @@
-<h1>{{title}}</h1>
+<h1 class="title text-center">{{title}}</h1>
 
 <div class="container">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -11,10 +11,15 @@
                         <h5 class="card-title"><strong>{{this.name}}</strong></h5>
                         <p class="card-text">{{this.description}}</p>
                     </div>
+                    <div class="card-footer">
+                        <div class="footer-content">
+                            <small class="text-muted average-rating">{{this.averageRating}} Stars</small>
+                            <small class="text-muted meal-type">{{this.mealType}}</small>
+                        </div>
+                    </div>
                 </div>
             </a>
         </div>
         {{/each}}
     </div>
 </div>
-

@@ -24,3 +24,33 @@ a {
     background-color: black;
 }
 
+.food-by-id-container {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.food-by-id-details {
+    flex: 7;
+    padding: 10px;
+}
+
+.food-by-id-related {
+    flex: 3;
+    padding: 10px;
+    border-left: 1px solid #ccc; 
+}
+
+.card-footer .footer-content {
+    display: flex;
+    justify-content: space-between; 
+    width: 100%;
+}
+
+.card-footer .average-rating {
+    text-align: left; 
+}
+
+.card-footer .meal-type {
+    text-align: right; 
+}
+

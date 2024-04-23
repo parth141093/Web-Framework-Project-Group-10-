@@ -3,12 +3,15 @@ const mongoose = require('mongoose');
 const foodSchema = new mongoose.Schema({
     name: String,
     description: String,
-    ingredients: Array,
-    how_to_make: Array,
+    ingredients: [String],
+    how_to_make: [String],
     type_of_food: String,
     nationality: String,
-    picture: String
-}, { collection: 'food_info' }); // Specified Collection
+    picture: String,
+    mealType: String,
+    ratings: [{type: Number}],
+    averageRating: { type: Number, default: 0 }
+}, { collection: 'food_info' }); 
 
 const Food = mongoose.model('Food', foodSchema);
 

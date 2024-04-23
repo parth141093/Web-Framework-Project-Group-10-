@@ -8,13 +8,6 @@ const dbURI = 'mongodb+srv://'+process.env.DBUSERNAME+':'+process.env.DBPASSWORD
 mongoose.connect(dbURI);
 const food_model = require('../models/food_model');
 
-
-
-//Home root
-const getHome = (req, res) => {
-    res.render('pages/index');
-};
-
 //list all food
 const getAllFood = async (req, res) => {
     try{
@@ -26,10 +19,10 @@ const getAllFood = async (req, res) => {
                 food.imageUrl = `/assets/images/${food.picture}.png`;
                 return food;
             })
-        })
+        });
     } catch (error) {
         console.log(error);
-        res.status(500).send("Internal Server Error");
+        res.status(500).send("Something went wrong! Please try again!");
     }
 };
 
@@ -39,7 +32,7 @@ const getAllFoodByType = async (req, res) => {
         const type_of_food = req.params.type_of_food;
         const foods = await food_model.find({ type_of_food: type_of_food });
         res.render('pages/allFoodByType', {
-            title: `Food Items - ${type_of_food}`,
+            title: `Type of food: ${type_of_food}`,
             foods: foods.map(doc => {
                 const food = doc.toJSON();
                 food.imageUrl = `/assets/images/${food.picture}.png`;
@@ -49,7 +42,7 @@ const getAllFoodByType = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).send("Internal Server Error");
+        res.status(500).send("Something went wrong! Please try again!");
     }
 };
 
@@ -61,11 +54,55 @@ const getFoodById = async (req, res) => {
         const foodData = food.toJSON();
         foodData.imageUrl = `/assets/images/${foodData.picture}.png`;
         const relatedFoods = await food_model.find({ type_of_food: food.type_of_food, _id: { $ne: foodId } });
+        const relatedFoodsData = relatedFoods.map(foodItem => {
+            return {
+                ...foodItem.toJSON(),
+                imageUrl: `/assets/images/${foodItem.picture}.png`,
+                averageRating: foodItem.averageRating
+            };
+        });
 
-        res.render('pages/foodById', { food: foodData, relatedFoods });
+        res.render('pages/foodById', { food: foodData, relatedFoods: relatedFoodsData });
     }catch(error){
         console.error(error);
-        res.status(500).json({error:"Internal Server Error"});
+        res.status(500).json("Something went wrong! Please try again!");
+    }
+};
+
+//rating system
+//first lets users rate the food in foodById
+const rate = async (req, res) => {
+    const {id} = req.params;
+    const {rating} = req.body;
+    try {
+        const food = await food_model.findById(id);
+        const updatedRatings = [...food.ratings, parseInt(rating)];
+        const averageRating = updatedRatings.reduce((acc, curr) => acc + curr, 0) / updatedRatings.length;
+
+        await food_model.findByIdAndUpdate(id, {
+            $push: { ratings: rating },
+            $set: { averageRating: averageRating }
+        }, { new: true });
+
+        // Redirect to a specific page, e.g., the food details page or home page
+        res.redirect(`/food/${id}`);
+    } catch (error) {
+        res.status(500).json({success: false, message: "Something went wrong!"});
+    }
+};
+//next, find out the highest rated food by mealType and display them in Homepage
+const getHome = async (req, res) => {
+    try {
+        const foods = await food_model.find().sort({ averageRating: -1 }).exec();
+        let highestRatedFood = {};
+        foods.forEach(food => {
+            if (!highestRatedFood[food.mealType] || highestRatedFood[food.mealType].averageRating < food.averageRating) {
+                highestRatedFood[food.mealType] = food;  
+            }});
+        res.render('pages/index', {highestRatedFood});
+    }catch(error){
+        console.error(error);
+        res.status(500).json({success: false, message: "Something went wrong!"})
     }
 };
 
@@ -105,8 +142,7 @@ const getEditFoodPage = async (req, res) => {
         res.status(500).send("Failed to get the food for edit.");
     }
 };
-const sendMail = async (req, res) => {
-};
+
 const editFood = async (req, res) => {
     try {
         const { id, name, description, ingredients, how_to_make, type_of_food, nationality, picture } = req.body;
@@ -178,4 +214,43 @@ const searchFood = async (req, res) => {
     }
 };
 
-module.exports = {getHome, getAllFood, getAllFoodByType, getFoodById, editFood, getAddFoodPage, postFood, deleteFood, getEditFoodPage, searchFood, sendMail};
+const nodemailer = require("nodemailer");
+
+const sendMail = async (req, res) => {
+  let testAccount = await nodemailer.createTestAccount();
+
+  // connect with the smtp
+const transporter = nodemailer.createTransport({
+    host: 'smtp.ethereal.email',
+    port: 587,
+    auth: {
+        user: 'alison.dickens89@ethereal.email',
+        pass: '2NXBhYVWq3NeN2Wa8Q'
+    }
+});
+  let info = await transporter.sendMail({
+    from: '"Parth Patel" <parthpatel1410@gmail.com>', // sender address
+    to: "parthpatel1410@gmail.com", // list of receivers
+    subject: "Hello Parth", // Subject line
+    text: "Hello YT Parth", // plain text body
+    html: "<b>Hello YT Parth</b>", // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  res.json(info);
+};
+
+module.exports = {
+    getHome, 
+    getAllFood, 
+    getAllFoodByType, 
+    getFoodById, 
+    rate,
+    editFood, 
+    getAddFoodPage, 
+    postFood, 
+    deleteFood, 
+    getEditFoodPage, 
+    searchFood, 
+    sendMail
+};
