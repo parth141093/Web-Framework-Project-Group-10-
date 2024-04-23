@@ -60,8 +60,9 @@ const getFoodById = async (req, res) => {
         const food = await food_model.findById(foodId);
         const foodData = food.toJSON();
         foodData.imageUrl = `/assets/images/${foodData.picture}.png`;
+        const relatedFoods = await food_model.find({ type_of_food: food.type_of_food, _id: { $ne: foodId } });
 
-        res.render('pages/foodById', { food: foodData });
+        res.render('pages/foodById', { food: foodData, relatedFoods });
     }catch(error){
         console.error(error);
         res.status(500).json({error:"Internal Server Error"});
@@ -157,5 +158,7 @@ const searchFood = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
+
+
 
 module.exports = {getHome, getAllFood, getAllFoodByType, getFoodById, editFood, getAddFoodPage, postFood, deleteFood, getEditFoodPage, searchFood};
