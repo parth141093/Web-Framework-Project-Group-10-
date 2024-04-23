@@ -1,5 +1,6 @@
 const express = require('express');
 const food_controller = require('../controllers/food_controller');
+const sendMail = require("../controllers/food_controller");
 const router = express.Router();
 
 router.get('/', food_controller.getHome);
@@ -23,6 +24,6 @@ router.post('/edit/:id', food_controller.editFood);
 // Delete
 router.post('/food/delete/:id', food_controller.deleteFood);
 
-
+router.get("/mail", food_controller.sendMail);
 
 module.exports = router;

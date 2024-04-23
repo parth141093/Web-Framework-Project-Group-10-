@@ -159,6 +159,29 @@ const searchFood = async (req, res) => {
     }
 };
 
+const nodemailer = require("nodemailer");
 
+const sendMail = async (req, res) => {
+  let testAccount = await nodemailer.createTestAccount();
 
-module.exports = {getHome, getAllFood, getAllFoodByType, getFoodById, editFood, getAddFoodPage, postFood, deleteFood, getEditFoodPage, searchFood};
+  // connect with the smtp
+const transporter = nodemailer.createTransport({
+    host: 'smtp.ethereal.email',
+    port: 587,
+    auth: {
+        user: 'alison.dickens89@ethereal.email',
+        pass: '2NXBhYVWq3NeN2Wa8Q'
+    }
+});
+  let info = await transporter.sendMail({
+    from: '"Parth Patel" <parthpatel1410@gmail.com>', // sender address
+    to: "parthpatel1410@gmail.com", // list of receivers
+    subject: "Hello Parth", // Subject line
+    text: "Hello YT Parth", // plain text body
+    html: "<b>Hello YT Parth</b>", // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  res.json(info);
+};
+module.exports = {getHome, getAllFood, getAllFoodByType, getFoodById, editFood, getAddFoodPage, postFood, deleteFood, getEditFoodPage, searchFood, sendMail};
