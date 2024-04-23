@@ -141,7 +141,7 @@ const searchFood = async (req, res) => {
 
     try {
         if (!searchTerm) {
-            return res.render('searchPage');;
+            return res.render('searchResults');
         }
 
         const foods = await food_model.find({ $text: { $search: searchTerm } });
