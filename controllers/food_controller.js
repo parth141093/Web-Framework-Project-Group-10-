@@ -105,7 +105,8 @@ const getEditFoodPage = async (req, res) => {
         res.status(500).send("Failed to get the food for edit.");
     }
 };
-
+const sendMail = async (req, res) => {
+};
 const editFood = async (req, res) => {
     try {
         const { id, name, description, ingredients, how_to_make, type_of_food, nationality, picture } = req.body;
@@ -128,7 +129,25 @@ const editFood = async (req, res) => {
         if (!food) {
             return res.status(404).json({ error: "Food not found"});
         }
-        
+        const nodemailer = require("nodemailer");
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            auth: {
+                user: process.env.USER,
+                pass: process.env.APP_PASSWORD,
+            }
+        });
+        let info = await transporter.sendMail({
+            from:{
+                name: 'Parth Patel',
+                address: process.env.USER
+            },
+            to: "parthpatel1410@gmail.com", // list of receivers
+            subject: "About Food", // Subject line
+            text: "Hello Team", // plain text body
+            html: "<b>Hello Your Food is Edited</b>", // html body
+          });
         res.send("<h1>Food edited</h1>");
     } catch (error) {
         console.log(error);
@@ -159,29 +178,4 @@ const searchFood = async (req, res) => {
     }
 };
 
-const nodemailer = require("nodemailer");
-
-const sendMail = async (req, res) => {
-  let testAccount = await nodemailer.createTestAccount();
-
-  // connect with the smtp
-const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    auth: {
-        user: 'alison.dickens89@ethereal.email',
-        pass: '2NXBhYVWq3NeN2Wa8Q'
-    }
-});
-  let info = await transporter.sendMail({
-    from: '"Parth Patel" <parthpatel1410@gmail.com>', // sender address
-    to: "parthpatel1410@gmail.com", // list of receivers
-    subject: "Hello Parth", // Subject line
-    text: "Hello YT Parth", // plain text body
-    html: "<b>Hello YT Parth</b>", // html body
-  });
-
-  console.log("Message sent: %s", info.messageId);
-  res.json(info);
-};
 module.exports = {getHome, getAllFood, getAllFoodByType, getFoodById, editFood, getAddFoodPage, postFood, deleteFood, getEditFoodPage, searchFood, sendMail};
