@@ -137,7 +137,7 @@ const editFood = async (req, res) => {
 
 // Search Function
 const searchFood = async (req, res) => {
-    const searchTerm = req.query.q;
+    const searchTerm = req.query.searchTerm;
 
     try {
         if (!searchTerm) {
