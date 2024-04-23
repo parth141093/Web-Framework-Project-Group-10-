@@ -1,4 +1,26 @@
-
 a {
     text-decoration: none !important;
 }
+
+#backToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: gray;
+    color: #fff;
+    border: none;
+    border-radius: 8px; /* Adjust the value to control the roundness of corners */
+    padding: 10px;
+    cursor: pointer;
+    display: none; /* Hide the button by default */
+}
+
+#backToTopBtn svg {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+#backToTopBtn:hover {
+    background-color: black;
+}
+

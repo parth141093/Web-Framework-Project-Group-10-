@@ -20,7 +20,7 @@ app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
-app.use(express.static('public'));
+app.use('/controllers', express.static(path.join(__dirname, 'controllers')));
 
 app.use('',require('./routes/food_route'));
 app.use('/food', require('./routes/food_route'));
