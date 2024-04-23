@@ -99,7 +99,7 @@ const deleteFood = async (req, res) => {
 const getEditFoodPage = async (req, res) => {
     try {
         const food = await food_model.findById(req.params.id);
-        res.render('editFood', { food });
+        res.render('pages/editFood', { food });
     } catch (error) {
         res.status(500).send("Failed to get the food for edit.");
     }
@@ -141,7 +141,7 @@ const searchFood = async (req, res) => {
 
     try {
         if (!searchTerm) {
-            return res.render('searchResults');
+            return res.render('pages/searchResults');
         }
 
         const foods = await food_model.find({ $text: { $search: searchTerm } });
@@ -151,7 +151,7 @@ const searchFood = async (req, res) => {
             return food;
         });
 
-        res.render('searchResults', { foods: foodsWithImage });
+        res.render('pages/searchResults', { foods: foodsWithImage });
     } catch (error) {
         console.log(error);
         res.status(500).send('Internal Server Error');
