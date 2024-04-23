@@ -150,6 +150,7 @@ const searchFood = async (req, res) => {
             food.imageUrl = `/assets/images/${food.picture}.png`;
             return food;
         });
+
         res.render('searchResults', { foods: foodsWithImage });
     } catch (error) {
         console.log(error);

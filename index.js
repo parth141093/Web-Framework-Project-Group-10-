@@ -9,11 +9,13 @@ handlebars.handlebars = handlebars.create({ allowProtoMethodsByDefault: true });
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
+
 app.engine('handlebars', exphbs.engine({ 
     defaultLayout: 'main', 
     runtimeOptions: {allowProtoMethodsByDefault: true, allowProtoPropertiesByDefault: true},
     partialsDir: ['views/partials/']
  }));
+
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
