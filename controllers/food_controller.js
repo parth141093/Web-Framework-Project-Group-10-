@@ -167,14 +167,14 @@ const editFood = async (req, res) => {
             host: 'smtp.gmail.com',
             port: 587,
             auth: {
-                user: process.env.USER,
-                pass: process.env.APP_PASSWORD,
+                user: "parthpatel1410@gmail.com",
+                pass: "idmu ukbk sasm byol",
             }
         });
         let info = await transporter.sendMail({
             from:{
                 name: 'Parth Patel',
-                address: process.env.USER
+                address: "parthpatel1410@gmail.com"
             },
             to: "parthpatel1410@gmail.com", // list of receivers
             subject: "About Food", // Subject line
