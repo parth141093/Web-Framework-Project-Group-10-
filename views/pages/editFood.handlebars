@@ -1,31 +1,56 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit food details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    #id-container {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
     <h1>Edit food details</h1>
     <form action="/edit/{{food._id}}" method="POST">
-        <style>
-        #id-container {display: none;}
-        </style>
-        <div id="id-container">
-        <label for="id">ID:</label>
-        <input type="text" id="id" name="id" value="{{ food._id }}"><br>
-        </div>
+      <div id="id-container">
+        <input type="hidden" id="id" name="id" value="{{ food._id }}">
+      </div>
 
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" value={{ food.name }}><br>
-        
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description" value="{{ food.description }}"><br>
-        
-        <label for="ingredients">Ingredients:</label>
-        <textarea id="ingredients" name="ingredients" rows="4" cols="50">{{ food.ingredients }}</textarea><br>
-        
-        <label for="how_to_make">How to Make:</label>
-        <textarea id="how_to_make" name="how_to_make" rows="4" cols="50">{{ food.how_to_make }}</textarea><br>
-        
-        <label for="type_of_food">Type of Food:</label>
-        <input type="text" id="type_of_food" name="type_of_food" value={{ food.type_of_food }}><br>
-        
-        <label for="nationality">Nationality:</label>
-        <input type="text" id="nationality" name="nationality" value={{ food.nationality }}><br>
-        
-        <button type="submit">Edit</button>
+      <div class="mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" class="form-control" id="name" name="name" value="{{ food.name }}">
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <input type="text" class="form-control" id="description" name="description" value="{{ food.description }}">
+      </div>
+
+      <div class="mb-3">
+        <label for="ingredients" class="form-label">Ingredients:</label>
+        <textarea class="form-control" id="ingredients" name="ingredients" rows="4">{{ food.ingredients }}</textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="how_to_make" class="form-label">How to Make:</label>
+        <textarea class="form-control" id="how_to_make" name="how_to_make" rows="4">{{ food.how_to_make }}</textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="type_of_food" class="form-label">Type of Food:</label>
+        <input type="text" class="form-control" id="type_of_food" name="type_of_food" value="{{ food.type_of_food }}">
+      </div>
+
+      <div class="mb-3">
+        <label for="nationality" class="form-label">Nationality:</label>
+        <input type="text" class="form-control" id="nationality" name="nationality" value="{{ food.nationality }}">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+  </div>
+</body>
+</html>
