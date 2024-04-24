@@ -139,7 +139,8 @@ const getEditFoodPage = async (req, res) => {
         res.status(500).send("Failed to get the food for edit.");
     }
 };
-
+const sendMail = async (req, res) => {
+};
 const editFood = async (req, res) => {
     try {
         const { id, name, description, ingredients, how_to_make, type_of_food, nationality, picture } = req.body;
@@ -209,32 +210,6 @@ const searchFood = async (req, res) => {
         console.log(error);
         res.status(500).send('Internal Server Error');
     }
-};
-
-const nodemailer = require("nodemailer");
-
-const sendMail = async (req, res) => {
-  let testAccount = await nodemailer.createTestAccount();
-
-  // connect with the smtp
-const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    auth: {
-        user: 'alison.dickens89@ethereal.email',
-        pass: '2NXBhYVWq3NeN2Wa8Q'
-    }
-});
-  let info = await transporter.sendMail({
-    from: '"Parth Patel" <parthpatel1410@gmail.com>', // sender address
-    to: "parthpatel1410@gmail.com", // list of receivers
-    subject: "Hello Parth", // Subject line
-    text: "Hello YT Parth", // plain text body
-    html: "<b>Hello YT Parth</b>", // html body
-  });
-
-  console.log("Message sent: %s", info.messageId);
-  res.json(info);
 };
 
 module.exports = {
