@@ -13,6 +13,12 @@ const foodSchema = new mongoose.Schema({
     averageRating: { type: Number, default: 0 }
 }, { collection: 'food_info' }); 
 
+foodSchema.virtual('comments', {
+    ref: 'Comment',
+    localField: '_id',
+    foreignField: 'foodId'
+  });
+
 const Food = mongoose.model('Food', foodSchema);
 
 module.exports = Food;

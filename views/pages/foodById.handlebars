@@ -88,3 +88,20 @@
         </div>
     </div>
 </div>
+
+<div class="comments-section">
+  <h2>Comments</h2>
+  <ul>
+    {{#each comments}}
+    <li>
+      {{this.content}}
+    </li>
+    {{/each}}
+  </ul>
+</div>
+
+<form id="comment-form" action="food/comment/add" method="POST">
+    <input type="hidden" name="foodId" value="{{ food._id }}">
+    <textarea name="content" rows="4" cols="50" placeholder="Write your comment here"></textarea>
+    <button type="submit">Submit</button>
+</form>

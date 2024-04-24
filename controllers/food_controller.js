@@ -7,6 +7,7 @@ const app = express();
 const dbURI = 'mongodb+srv://'+process.env.DBUSERNAME+':'+process.env.DBPASSWORD+'@'+process.env.CLUSTER+'.mongodb.net/'+process.env.DB+'?retryWrites=true&w=majority';
 mongoose.connect(dbURI);
 const food_model = require('../models/food_model');
+const Comment = require('../models/comment_model');
 
 //list all food
 const getAllFood = async (req, res) => {
@@ -51,6 +52,7 @@ const getFoodById = async (req, res) => {
     try{
         const foodId = req.params.id;
         const food = await food_model.findById(foodId);
+        const comments = await Comment.find({ foodId: foodId }).exec();
         const foodData = food.toJSON();
         foodData.imageUrl = `/assets/images/${foodData.picture}.png`;
         const relatedFoods = await food_model.find({ type_of_food: food.type_of_food, _id: { $ne: foodId } });
@@ -61,7 +63,7 @@ const getFoodById = async (req, res) => {
                 averageRating: foodItem.averageRating
             };
         });
-        res.render('pages/foodById', { food: foodData, relatedFoods: relatedFoodsData });
+        res.render('pages/foodById', { food: foodData, relatedFoods: relatedFoodsData, comments: comments });
     }catch(error){
         console.error(error);
         res.status(500).json("Something went wrong! Please try again!");
@@ -212,6 +214,19 @@ const searchFood = async (req, res) => {
     }
 };
 
+//comment code
+const addComment = async (req, res) => {
+    try {
+      const { foodId, content } = req.body;
+      const comment = new Comment({ foodId, content });
+      await comment.save();
+      res.redirect(`/food/${foodId}`);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
+
 module.exports = {
     getHome, 
     getAllFood, 
@@ -224,5 +239,6 @@ module.exports = {
     deleteFood, 
     getEditFoodPage, 
     searchFood, 
-    sendMail
+    sendMail,
+    addComment
 };

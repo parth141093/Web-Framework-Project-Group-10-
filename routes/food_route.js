@@ -6,6 +6,9 @@ const { addRating } = require('../controllers/food_controller');
 
 router.get('/', food_controller.getHome);
 
+//Comment
+router.post('/food/comment/add', food_controller.addComment);
+
 // Search
 router.get('/food/search', food_controller.searchFood);
 
@@ -27,6 +30,7 @@ router.post('/edit/:id', food_controller.editFood);
 
 // Delete
 router.post('/food/delete/:id', food_controller.deleteFood);
+
 
 router.get("/mail", food_controller.sendMail);
 
