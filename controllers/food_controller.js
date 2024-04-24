@@ -164,19 +164,19 @@ const editFood = async (req, res) => {
         }
         const nodemailer = require("nodemailer");
         const transporter = nodemailer.createTransport({
-            host: 'smtp.gmail.com',
+            host: 'smtp.mailosaur.net',
             port: 587,
             auth: {
-                user: "parthpatel1410@gmail.com",
-                pass: "idmu ukbk sasm byol",
+                user: "ejhcanme@mailosaur.net",
+                pass: "TXH04fX8FprZQKAkgiqavGrscJcBHoEm",
             }
         });
         let info = await transporter.sendMail({
             from:{
-                name: 'Parth Patel',
-                address: "parthpatel1410@gmail.com"
+                name: 'Group10',
+                address: "ejhcanme@mailosaur.net"
             },
-            to: "parthpatel1410@gmail.com", // list of receivers
+            to: "ejhcanme@mailosaur.net", // list of receivers
             subject: "About Food", // Subject line
             text: "Hello Team", // plain text body
             html: "<b>Hello Your Food is Edited</b>", // html body
