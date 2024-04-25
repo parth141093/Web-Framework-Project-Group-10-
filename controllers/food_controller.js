@@ -33,7 +33,7 @@ const getAllFoodByType = async (req, res) => {
         const type_of_food = req.params.type_of_food;
         const foods = await food_model.find({ type_of_food: type_of_food });
         res.render('pages/allFoodByType', {
-            title: `Type of food: ${type_of_food}`,
+            title: `Here are our great ${type_of_food} recipes`,
             foods: foods.map(doc => {
                 const food = doc.toJSON();
                 food.imageUrl = `/assets/images/${food.picture}.png`;

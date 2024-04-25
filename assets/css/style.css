@@ -6,7 +6,7 @@ a {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: gray;
+    background-color: black;
     color: #fff;
     border: none;
     border-radius: 8px; 
@@ -21,7 +21,7 @@ a {
 }
 
 #backToTopBtn:hover {
-    background-color: black;
+    background-color: rgba(0,0,0,0.2);
 }
 
 .food-by-id-container {
@@ -52,5 +52,94 @@ a {
 
 .card-footer .meal-type {
     text-align: right; 
+}
+
+/*Home page*/
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+    background: #f9f9f9;
+    color: #333;
+}
+
+.highest-rated-food-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.food-section {
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin: 10px 0;
+    padding: 20px;
+}
+
+.food-section-link {
+    display: flex; 
+    align-items: center; 
+    text-decoration: none; 
+    color: inherit;
+    width: 100%; 
+}
+
+.food-image {
+    width: 200px;
+    height: auto;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.food-content {
+    flex-grow: 1;
+}
+
+.homepage-meal-type { 
+    color: white;
+    background-color: black;
+    padding: 2px 5px;
+    font-size: small;
+}
+
+.food-name {
+    font-size: 1.5em;
+    margin-top: 0; 
+    font-weight: bold;
+}
+
+.food-rating {
+    margin-top: 5px;
+}
+
+.view-all-foods {
+    text-align: center;
+    margin-top: 20px;
+}
+/*home page button*/
+.view-all-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+    text-decoration: none; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: background-color 0.3s;
+}
+
+.view-all-button:hover {
+    background-color: gray;
+}
+/* home page banner*/
+.homepage-banner img {
+    width: 100%;  
+    height: auto; 
+    max-width: 1200px; 
+    max-height: 500px; 
+    display: block; 
+    margin: 0 auto; 
 }
 

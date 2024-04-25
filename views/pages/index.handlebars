@@ -1,12 +1,27 @@
-Home page
+<h1 class="text-center mt-5"><strong>Welcome to our food blog!</strong></h1>
 
-{{#each highestRatedFood as |food type|}}
-<div>
-  <h2>{{type}} - Highest Rated</h2>
-  <h3>{{food.name}}</h3>
-  <img src="/assets/images/{{food.picture}}.png" alt="Image of {{food.name}}" style="width:200px; height:auto;">
-  <p>{{food.description}}</p>
-  <p>Meal Type: {{type}}</p>
-  <p>Average Rating: {{toFixed food.averageRating 2}}</p>
+<div class="homepage-banner mt-5">
+  <img src="/assets/background/background.png" alt="Delicious food" style="width: 100%; height: auto; max-width: 1200px; max-height: 500px;">
 </div>
-{{/each}}
+
+<div class="highest-rated-food-container mt-5">
+  <h2 class="text-center mt-5">What do you feel like to eat today?</h2>
+  <h2 class="text-center">Here are our best recipes</h2>
+  {{#each highestRatedFood as |food type|}}
+    <div class="food-section">
+      <a href="/food/{{food._id}}" class="food-section-link">
+        <img src="/assets/images/{{food.picture}}.png" alt="Image of {{food.name}}" class="food-image">
+        <div class="food-content">
+          <span class="homepage-meal-type">{{type}}</span>
+          <h3 class="food-name">{{food.name}}</h3>
+          <p>{{food.description}}</p>
+          <p class="food-rating">Rating: {{toFixed food.averageRating 2}} Stars</p>
+        </div>
+      </a>
+    </div>
+  {{/each}}
+</div>
+
+<div class="view-all-foods">
+  <a href="/food" class="view-all-button">View All Foods</a>
+</div>
