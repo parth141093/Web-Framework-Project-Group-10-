@@ -47,6 +47,26 @@ const getAllFoodByType = async (req, res) => {
     }
 };
 
+// list all food by mealType
+const getAllFoodByMealType = async (req, res) => {
+    try {
+        const mealType = req.params.mealType;
+        const foods = await food_model.find({ mealType: mealType });
+        res.render('pages/allFoodByMealType', {
+            title: `Here are our great ${mealType} recipes`,
+            foods: foods.map(doc => {
+                const food = doc.toJSON();
+                food.imageUrl = `/assets/images/${food.picture}.png`;
+                return food;
+                
+            })
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Something went wrong! Please try again!");
+    }
+};
+
 //get a food details by id
 const getFoodById = async (req, res) => {
     try{
@@ -232,6 +252,7 @@ module.exports = {
     getHome, 
     getAllFood, 
     getAllFoodByType, 
+    getAllFoodByMealType,
     getFoodById, 
     rate,
     editFood, 

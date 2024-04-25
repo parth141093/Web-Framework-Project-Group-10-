@@ -20,7 +20,7 @@
             <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="/food">AllFood</a>
+            <a class="nav-link" href="/food">All Food</a>
           </li>
           {{#if isLoggedIn}}
         <li class="nav-item">
@@ -41,12 +41,26 @@
     {{/if}}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              FoodType
+              Food Type
             </a>
             <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/food/type/fine dining">Fine Dining</a></li>
+              <li><a class="dropdown-item" href="/food/type/street food">Street Food</a></li>
               <li><a class="dropdown-item" href="/food/type/vegan">Vegan</a></li>
               <li><a class="dropdown-item" href="/food/type/fried">Fried</a></li>
               <li><a class="dropdown-item" href="/food/type/beverage">Beverage</a></li>
+            </ul>
+          </li> 
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Meal Type
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/food/meal-type/main ">Main dish</a></li>
+              <li><a class="dropdown-item" href="/food/meal-type/appetizer">Appetizer</a></li>
+              <li><a class="dropdown-item" href="/food/meal-type/side">Side dish</a></li>
+              <li><a class="dropdown-item" href="/food/meal-type/dessert">Dessert</a></li>
+              <li><a class="dropdown-item" href="/food/meal-type/drink">Drink</a></li>
             </ul>
           </li> 
         </ul>
