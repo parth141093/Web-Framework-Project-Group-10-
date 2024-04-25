@@ -30,14 +30,14 @@ const login = (req, res, next) => {
             return next(err);
         }
         if (!user) {
-            // Render the login page with error message
             return res.status(400).render('pages/login', { errorMessage: info.message });
         }
         req.logIn(user, (err) => {
             if (err) {
                 return next(err);
             }
-            // Redirect to a different page upon successful login
+            req.session.isLoggedIn = true;
+            req.session.username = user.username;
             res.redirect('/');
         });
     })(req, res, next);
@@ -46,12 +46,11 @@ const login = (req, res, next) => {
 
 //Logout
 const logout = (req, res) => {
-    req.logout((err) => {
+    req.logout((err) => { 
         if (err) {
             console.error(err);
             return res.status(500).json({ error: 'Internal Server Error' });
         }
-        // Redirect to a different page upon successful logout
         res.redirect('/');
     });
 };
