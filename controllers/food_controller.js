@@ -84,6 +84,7 @@ const rate = async (req, res) => {
             $push: { ratings: rating },
             $set: { averageRating: averageRating }
         }, { new: true });
+
         res.redirect(`/food/${id}`);
     } catch (error) {
         res.status(500).json({success: false, message: "Something went wrong!"});
