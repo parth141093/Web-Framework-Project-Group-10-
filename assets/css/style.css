@@ -112,12 +112,12 @@ body {
 .food-rating {
     margin-top: 5px;
 }
-
+/*home page buttons*/
 .view-all-foods {
     text-align: center;
     margin-top: 20px;
 }
-/*home page button*/
+
 .view-all-button {
     display: inline-block;
     padding: 10px 20px;
@@ -131,6 +131,27 @@ body {
 }
 
 .view-all-button:hover {
+    background-color: gray;
+}
+
+.add-a-food {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.add-a-food-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+    text-decoration: none; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: background-color 0.3s;
+}
+
+.add-a-food-button:hover {
     background-color: gray;
 }
 /* home page banner*/
