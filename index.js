@@ -1,10 +1,20 @@
 const express = require('express');
+const session = require('express-session');
+const passport = require('./config/passport');
 const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
 const path = require('path');
 require('dotenv').config();
 
 const app = express();
+app.use(session({
+    secret: 'secret-key',
+    resave: false,
+    saveUninitialized: false
+  }));
+  app.use(passport.initialize());
+  app.use(passport.session());
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
