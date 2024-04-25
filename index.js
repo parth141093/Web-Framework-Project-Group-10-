@@ -35,6 +35,7 @@ app.use('/controllers', express.static(path.join(__dirname, 'controllers')));
 
 app.use('', require('./routes/food_route'));
 app.use('/food', require('./routes/food_route'));
+app.use('/auth', require('./routes/auth_route'));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`App listening to port ${PORT}`));
