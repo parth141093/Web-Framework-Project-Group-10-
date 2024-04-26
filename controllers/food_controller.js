@@ -142,6 +142,7 @@ const postFood = async (req, res) => {
     }
 };
 
+//delete
 const deleteFood = async (req, res) => {
     try {
         const result = await food_model.findByIdAndDelete(req.params.id);
