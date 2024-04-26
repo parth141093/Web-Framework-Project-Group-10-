@@ -22,23 +22,6 @@
           <li class="nav-item active">
             <a class="nav-link" href="/food">All Food</a>
           </li>
-          {{#if isLoggedIn}}
-        <li class="nav-item">
-            <span class="navbar-text text-light">Logged in as: {{username}}</span>
-        </li>
-        <li class="nav-item">
-            <form action="/auth/logout" method="POST">
-                <button type="submit" class="btn btn-outline-danger">Logout</button>
-            </form>
-        </li>
-    {{else}}
-        <li class="nav-item">
-            <a href="/auth/login" class="nav-link">Login</a>
-        </li>
-        <li class="nav-item">
-            <a href="/auth/signup" class="nav-link">Sign Up</a>
-        </li>
-    {{/if}}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Food Type
