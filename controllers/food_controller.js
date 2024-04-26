@@ -163,8 +163,7 @@ const getEditFoodPage = async (req, res) => {
         res.status(500).send("Failed to get the food for edit.");
     }
 };
-const sendMail = async (req, res) => {
-};
+
 const editFood = async (req, res) => {
     try {
         const { id, name, description, ingredients, how_to_make, type_of_food, nationality, picture } = req.body;
@@ -262,6 +261,5 @@ module.exports = {
     deleteFood, 
     getEditFoodPage, 
     searchFood, 
-    sendMail,
     addComment
 };

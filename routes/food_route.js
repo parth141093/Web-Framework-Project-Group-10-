@@ -31,7 +31,4 @@ router.post('/edit/:id', food_controller.editFood);
 // Delete
 router.post('/food/delete/:id', food_controller.deleteFood);
 
-
-router.get("/mail", food_controller.sendMail);
-
 module.exports = router;
