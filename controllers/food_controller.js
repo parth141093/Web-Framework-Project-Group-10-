@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const { emailTypeEnum, sendEmail } = require('../utilities/send_email');
 require('dotenv').config();
 
 const app = express();
@@ -145,7 +146,11 @@ const postFood = async (req, res) => {
 //delete
 const deleteFood = async (req, res) => {
     try {
+        const food = await food_model.findById(req.params.id);
         const result = await food_model.findByIdAndDelete(req.params.id);
+
+        sendEmail(emailTypeEnum.DELETE, null, food, null);
+
         res.send("Food deleted successfully");
     } catch (error) {
         res.status(500).send("Failed to delete the food.");
@@ -166,12 +171,12 @@ const getEditFoodPage = async (req, res) => {
 
 const editFood = async (req, res) => {
     try {
-        const { id, name, description, ingredients, how_to_make, type_of_food, nationality, picture } = req.body;
+        const { id, name, description, ingredients, how_to_make, type_of_food, nationality, mealType, email } = req.body;
         if (!name) {
             return res.status(400).json({ error: "Name of food is required"});
         }
 
-        const updatedFields = { name, description, type_of_food, nationality, picture };
+        const updatedFields = { name, description, type_of_food, nationality, mealType };
 
         // Convert ingredients and how_to_make to arrays if they are provided as comma-separated strings
         if (ingredients) {
@@ -181,30 +186,16 @@ const editFood = async (req, res) => {
             updatedFields.how_to_make = how_to_make.split('\n').map(step => step.trim());
         }
 
+        const currentFoodDetails = await food_model.findById(id);
+
         const food = await food_model.findByIdAndUpdate(id, updatedFields, { new: true });
 
         if (!food) {
             return res.status(404).json({ error: "Food not found"});
         }
-        const nodemailer = require("nodemailer");
-        const transporter = nodemailer.createTransport({
-            host: 'smtp.mailosaur.net',
-            port: 587,
-            auth: {
-                user: "ejhcanme@mailosaur.net",
-                pass: "TXH04fX8FprZQKAkgiqavGrscJcBHoEm",
-            }
-        });
-        let info = await transporter.sendMail({
-            from:{
-                name: 'Group10',
-                address: "ejhcanme@mailosaur.net"
-            },
-            to: "ejhcanme@mailosaur.net", // list of receivers
-            subject: "About Food", // Subject line
-            text: "Hello Team", // plain text body
-            html: "<b>Hello Your Food is Edited</b>", // html body
-          });
+
+        sendEmail(emailTypeEnum.UPDATE, email, currentFoodDetails, food);
+
         res.send("<h1>Food edited</h1>");
     } catch (error) {
         console.log(error);
