@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { emailTypeEnum, sendEmail } = require('../utilities/send_email');
 require('dotenv').config();
+const { body, validationResult } = require('express-validator');
 
 const app = express();
 
@@ -226,9 +227,20 @@ const searchFood = async (req, res) => {
     }
 };
 
+//Comment Validation code
+const addCommentValidationRules = [
+    body('foodId').notEmpty().isMongoId(),
+    body('content').notEmpty().trim().isString().escape(),
+  ];
+
 //comment code
 const addComment = async (req, res) => {
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+  
       const { foodId, content } = req.body;
       const comment = new Comment({ foodId, content });
       await comment.save();
@@ -252,5 +264,6 @@ module.exports = {
     deleteFood, 
     getEditFoodPage, 
     searchFood, 
-    addComment
+    addComment,
+    addCommentValidationRules
 };
