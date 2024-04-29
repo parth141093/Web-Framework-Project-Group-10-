@@ -15,6 +15,9 @@ router.get('/food/add', food_controller.getAddFoodPage);
 router.post('/food', food_controller.postFoodValidationRules, food_controller.postFood);
 
 // List
+router.get('/admin/food', food_controller.getAllFoodForAdmin);
+router.get('/admin/food/isDeleted/:isDeleted', food_controller.getAllFoodForAdmin);
+router.get('/admin/food/isEdited/:isEdited', food_controller.getAllFoodForAdmin);
 router.get('/food', food_controller.getAllFood);
 router.get('/food/type/:type_of_food', food_controller.getAllFoodByType);
 router.get('/food/:id', food_controller.getFoodById);

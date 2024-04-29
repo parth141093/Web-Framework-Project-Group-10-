@@ -36,6 +36,13 @@ const hbs = exphbs.create({
                 return Number(value).toFixed(precision);
             }
             return '';
+        },
+        isTrue: function (value, options) {
+            if(value == true) {
+                return options.fn(this);
+            } else { 
+                return options.inverse(this);
+            }
         }
     }
 });

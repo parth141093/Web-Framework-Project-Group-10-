@@ -29,6 +29,30 @@ const getAllFood = async (req, res) => {
     }
 };
 
+//list all food for admin
+const getAllFoodForAdmin = async (req, res) => {
+    try{
+        const isDeleted = (req.params.isDeleted == 'true') ? true : false;
+        const isEdited = (req.params.isEdited == 'true') ? true : false;
+        console.log('isDeleted');
+        console.log(isDeleted);
+        const foods = await food_model.find();
+        res.render('admin/allFood', {
+            title: "Eat what today?",
+            foods: foods.map(doc => {
+                const food = doc.toJSON();
+                food.imageUrl = `/assets/images/${food.picture}.png`;
+                return food;
+            }),
+            isDeleted: isDeleted,
+            isEdited: isEdited
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Something went wrong! Please try again!");
+    }
+};
+
 //list all food by type
 const getAllFoodByType = async (req, res) => {
     try {
@@ -170,7 +194,7 @@ const deleteFood = async (req, res) => {
 
         sendEmail(emailTypeEnum.DELETE, null, food, null);
 
-        res.send("Food deleted successfully");
+        res.redirect('/admin/food/isDeleted/true');
     } catch (error) {
         res.status(500).send("Failed to delete the food.");
     }
@@ -183,6 +207,7 @@ const getEditFoodPage = async (req, res) => {
     try {
         const food = await food_model.findById(req.params.id);
         res.render('pages/editFood', { food });
+        // res.redirect('/admin/food/isEdited/true');
     } catch (error) {
         res.status(500).send("Failed to get the food for edit.");
     }
@@ -215,7 +240,8 @@ const editFood = async (req, res) => {
 
         sendEmail(emailTypeEnum.UPDATE, email, currentFoodDetails, food);
 
-        res.send("<h1>Food edited</h1>");
+        // res.send("<h1>Food edited</h1>");
+        res.redirect('/admin/food/isEdited/true');
     } catch (error) {
         console.log(error);
         res.status(500).send('Internal Server Error');
@@ -270,7 +296,8 @@ const addComment = async (req, res) => {
   };
 
 module.exports = {
-    getHome, 
+    getHome,
+    getAllFoodForAdmin,
     getAllFood, 
     getAllFoodByType, 
     getAllFoodByMealType,
