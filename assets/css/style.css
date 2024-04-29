@@ -1,5 +1,26 @@
+body {
+    background-color: white;
+    color: black;
+    font-family: Arial, sans-serif;
+}
+
 a {
     text-decoration: none !important;
+}
+
+h1 {
+    font-weight: bold !important;
+    font-size: 30px !important;
+}
+
+h3 {
+    font-weight: bold !important;
+    font-size: 18px !important;
+}
+
+h2 {
+    font-weight: bold !important;
+    font-size: 30px !important;
 }
 
 #backToTopBtn {
@@ -24,6 +45,7 @@ a {
     background-color: rgba(0,0,0,0.2);
 }
 
+/* Food details */
 .food-by-id-container {
     display: flex;
     flex-wrap: nowrap;
@@ -117,42 +139,9 @@ body {
     text-align: center;
     margin-top: 20px;
 }
-
-.view-all-button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 1em;
-    color: white;
-    background-color: black;
-    border-radius: 5px;
-    text-decoration: none; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: background-color 0.3s;
-}
-
-.view-all-button:hover {
-    background-color: gray;
-}
-
 .add-a-food {
     text-align: center;
     margin-top: 20px;
-}
-
-.add-a-food-button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 1em;
-    color: white;
-    background-color: black;
-    border-radius: 5px;
-    text-decoration: none; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: background-color 0.3s;
-}
-
-.add-a-food-button:hover {
-    background-color: gray;
 }
 /* home page banner*/
 .homepage-banner img {
@@ -164,3 +153,41 @@ body {
     margin: 0 auto; 
 }
 
+/* categories */
+.food-category-button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 5px 10px; /* Smaller padding for smaller buttons */
+    font-size: 12px; /* Smaller font size */
+    cursor: pointer;
+    margin-right: 10px;
+    border-radius: 0px; /* Square corners */
+}
+.food-category-button:hover {
+    background-color: grey;
+}
+
+/* food details pic */
+.picture img {
+    width: 100%;
+    height: auto;
+}
+
+/* general button */
+.button-black, button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.button-black:hover, button:hover {
+    background-color: grey;
+}

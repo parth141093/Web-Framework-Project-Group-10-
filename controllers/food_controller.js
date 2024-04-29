@@ -11,7 +11,7 @@ mongoose.connect(dbURI);
 const food_model = require('../models/food_model');
 const Comment = require('../models/comment_model');
 
-//list all food
+//list all food 
 const getAllFood = async (req, res) => {
     try{
         const foods = await food_model.find();
@@ -69,8 +69,8 @@ const getAllFoodByMealType = async (req, res) => {
     }
 };
 
-//get a food details by id
-const getFoodById = async (req, res) => {
+//get a food details by id - user
+const getFoodByIdUser = async (req, res) => {
     try{
         const foodId = req.params.id;
         const food = await food_model.findById(foodId);
@@ -85,7 +85,30 @@ const getFoodById = async (req, res) => {
                 averageRating: foodItem.averageRating
             };
         });
-        res.render('pages/foodById', { food: foodData, relatedFoods: relatedFoodsData, comments: comments });
+        res.render('pagesUser/foodById', { food: foodData, relatedFoods: relatedFoodsData, comments: comments });
+    }catch(error){
+        console.error(error);
+        res.status(500).json("Something went wrong! Please try again!");
+    }
+};
+
+//get a food details by id - admin
+const getFoodByIdAdmin = async (req, res) => {
+    try{
+        const foodId = req.params.id;
+        const food = await food_model.findById(foodId);
+        const comments = await Comment.find({ foodId: foodId }).exec();
+        const foodData = food.toJSON();
+        foodData.imageUrl = `/assets/images/${foodData.picture}.png`;
+        const relatedFoods = await food_model.find({ type_of_food: food.type_of_food, _id: { $ne: foodId } });
+        const relatedFoodsData = relatedFoods.map(foodItem => {
+            return {
+                ...foodItem.toJSON(),
+                imageUrl: `/assets/images/${foodItem.picture}.png`,
+                averageRating: foodItem.averageRating
+            };
+        });
+        res.render('pagesAdmin/foodById', { food: foodData, relatedFoods: relatedFoodsData, comments: comments });
     }catch(error){
         console.error(error);
         res.status(500).json("Something went wrong! Please try again!");
@@ -274,7 +297,8 @@ module.exports = {
     getAllFood, 
     getAllFoodByType, 
     getAllFoodByMealType,
-    getFoodById, 
+    getFoodByIdUser,
+    getFoodByIdAdmin, 
     rate,
     editFood, 
     getAddFoodPage, 

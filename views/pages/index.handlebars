@@ -8,14 +8,14 @@
   <h2 class="text-center mt-5">What do you feel like to eat today?</h2>
   <h2 class="text-center">Here are our best recipes</h2>
   {{#each highestRatedFood as |food type|}}
-    <div class="food-section">
+    <div class="food-section mt-5">
       <a href="/food/{{food._id}}" class="food-section-link">
         <img src="/assets/images/{{food.picture}}.png" alt="Image of {{food.name}}" class="food-image">
         <div class="food-content">
           <span class="homepage-meal-type">{{type}}</span>
           <h3 class="food-name">{{food.name}}</h3>
           <p>{{food.description}}</p>
-          <p class="food-rating">Rating: {{toFixed food.averageRating 2}} Stars</p>
+          <p class="food-rating">Rating: {{toFixed food.averageRating 2}} ★★★★★</p>
         </div>
       </a>
     </div>
@@ -23,9 +23,9 @@
 </div>
 <h2 class="text-center mt-5">Have an awesome recipe to share with us?</h2>
 <div class="add-a-food">
-  <a href="/food/add" class="add-a-food-button">Share A Food</a>
+  <a href="/food/add" class="button-black">Share A Food</a>
 </div>
 <h2 class="text-center mt-5">Discover all the magnificent food</h2>
 <div class="view-all-foods">
-  <a href="/food" class="view-all-button">View All Foods</a>
+  <a href="/food" class="button-black">View All Foods</a>
 </div>

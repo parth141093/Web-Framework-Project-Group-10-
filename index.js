@@ -18,8 +18,6 @@ app.use(session({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
-
 const hbs = exphbs.create({
     defaultLayout: 'main',
     extname: '.handlebars',
@@ -49,13 +47,6 @@ app.use('/controllers', express.static(path.join(__dirname, 'controllers')));
 
 app.use('', require('./routes/food_route'));
 app.use('/food', require('./routes/food_route'));
-app.use('/auth', require('./routes/auth_route'));
 
-
-/*
-app.get('/', (req, res) => {
-    res.render('pages/index', { isLoggedIn: req.session.isLoggedIn, username: req.session.username });
-});
-*/
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`App listening to port ${PORT}`));

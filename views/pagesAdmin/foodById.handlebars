@@ -1,0 +1,86 @@
+<div class="food-by-id-container">
+  <div class="food-by-id-details">
+    <h1 class="food-name">{{ food.name }}</h1>
+    <div class="food-categories">
+        <a href="/food/type/{{ food.type_of_food }}" class="food-category-link">
+            <button class="food-category-button">{{ food.type_of_food }}</button>
+        </a>
+        <a href="/food/meal-type/{{ food.mealType }}" class="food-category-link">
+            <button class="food-category-button">{{ food.mealType }}</button>
+        </a>
+    </div>
+    <div class="food-by-id-detail picture mt-5">
+        <img src="/assets/images/{{ food.picture }}.png" alt="{{ food.name }}">
+    </div>
+    <div class="food-by-id-detail mt-3">
+        <h3>Nationality</h3>
+        <p>{{ food.nationality }}</p>
+    </div>
+    <div class="food-by-id-detail">
+        <h3>Ingredients</h3>
+        <ul>
+            {{#each food.ingredients}}
+            <li>{{ this }}</li>
+            {{/each}}
+        </ul>
+    </div>
+    <div class="food-by-id-detail">
+        <h3>How to Make</h3>
+        <ol>
+            {{#each food.how_to_make}}
+            <li>{{ this }}</li>
+            {{/each}}
+        </ol>
+    </div>
+    <div class="food-by-id-detail">
+        <h3>Rating</h3>
+        <p>{{toFixed food.averageRating 2}} ★★★★★</p>
+    </div>
+        <form action="/food/edit/{{food._id}}" method="get">
+            <button class="button-black" type="submit">Edit</button>
+        </form>
+        <form action="/food/delete/{{food._id}}" method="post">
+            <button class="button-black" type="submit">Delete</button>
+        </form>
+    </div>
+
+    <div class="food-by-id-related">
+        <h2>Related Food</h2>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                {{#each relatedFoods}}
+                <div class="col">
+                    <a href="/food/{{this._id}}" class="food-card-link">
+                        <div class="card h-100 shadow">
+                            <img src="{{this.imageUrl}}" class="card-img-top" alt="{{this.name}}">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>{{this.name}}</strong></h5>
+                                <p class="card-text">{{this.description}}</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="footer-content">
+                                    <small class="text-muted average-rating">{{this.averageRating}} ★★★★★</small>
+                                    <small class="text-muted meal-type">{{this.mealType}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="comments-section">
+    <h2>Comments</h2>
+    <ul>
+        {{#each comments}}
+            <li>{{this.content}}</li>
+        {{/each}}
+    </ul>
+    <form id="comment-form" action="food/comment/add" method="POST">
+        <textarea name="content" rows="4" cols="50" placeholder="Write your comment here"></textarea>
+        <button class="button-black" type="submit">Submit</button>
+    </form>
+</div>
