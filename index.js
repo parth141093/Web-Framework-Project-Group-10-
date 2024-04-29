@@ -47,9 +47,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use('/controllers', express.static(path.join(__dirname, 'controllers')));
 
+app.use('', require('./routes/food_route'));
 app.use('/food', require('./routes/food_route'));
 app.use('/auth', require('./routes/auth_route'));
-app.use('', require('./routes/food_route'));
+
 
 /*
 app.get('/', (req, res) => {
