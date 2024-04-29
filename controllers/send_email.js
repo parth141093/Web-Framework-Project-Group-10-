@@ -15,19 +15,19 @@ const sendEmail = async (emailType, emailAddress, oldDetails, updatedDetails = n
     }
     const nodemailer = require("nodemailer");
     const transporter = nodemailer.createTransport({
-        host: 'smtp.mailosaur.net',
+        service: "gmail",
+        host: "smtp.gmail.com",
         port: 587,
+        secure: false,
         auth: {
-            user: "ejhcanme@mailosaur.net",
-            pass: "TXH04fX8FprZQKAkgiqavGrscJcBHoEm",
-        }
-    });
-    let info = await transporter.sendMail({
-        from:{
-            name: emailAddress ?? 'admin@admin.com',
-            address: emailAddress ?? 'admin@admin.com'
+          user: 'parthpatel1410@gmail.com',
+          pass: 'qxrd jkwt ayym nxwl',
         },
-        to: "ejhcanme@mailosaur.net", // list of receivers
+      });
+    await transporter.sendMail({
+        from: 'parthpatel1410@gmail.com',
+        to: `${emailAddress}`,
+        bcc: `ejhcanme@mailosaur.net`,
         subject: subjectText, // Subject line
         html: body(emailType, oldDetails, updatedDetails)
       });
