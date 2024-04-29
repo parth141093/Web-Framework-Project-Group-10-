@@ -1,6 +1,6 @@
 const express = require('express');
 const session = require('express-session');
-const passport = require('./config/passport');
+const passport = require('./controllers/passport');
 const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
 const path = require('path');

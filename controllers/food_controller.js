@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { emailTypeEnum, sendEmail } = require('../utilities/send_email');
+const { emailTypeEnum, sendEmail } = require('./send_email');
 require('dotenv').config();
 const { body, validationResult } = require('express-validator');
 
