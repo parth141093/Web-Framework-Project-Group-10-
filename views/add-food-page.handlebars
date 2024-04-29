@@ -1,29 +1,61 @@
-<h1>Add a Food!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add a New Food</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    #id-container {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>Add Food Details</h1>
+    <form action="/food" method="POST">
+      <div id="id-container">
+        <input type="hidden" id="id" name="id" value="{{ food._id }}">
+      </div>
 
-<form method="post" action="/food">
-    <h2>Name</h2>
-    <input type="text" name="name"><br>
-    <h2>Description</h2>
-    <input type="text" name="description"><br>
-    <h2>Ingredient 1</h2>
-    <input type="text" name="ingredients[]" placeholder="Ingredient 1"><br>
-    <h2>Ingredient 2</h2>
-    <input type="text" name="ingredients[1]" placeholder="Ingredient 2"><br>
-    <h2>Ingredient 3</h2>
-    <input type="text" name="ingredients[2]" placeholder="Ingredient 3"><br>
-    <h2>Step 1</h2>
-    <input type="text" name="how_to_make[]" placeholder="Step 1"><br>
-    <h2>Step 2</h2>
-    <input type="text" name="how_to_make[1]" placeholder="Step 2"><br>
-    <h2>Step 3</h2>
-    <input type="text" name="how_to_make[2]" placeholder="Step 3"><br>
-    <h2>Type of Food</h2>
-    <input type="text" name="type_of_food"><br>
-    <h2>Nationality</h2>
-    <input type="text" name="nationality"><br>
-    <h2>Picture</h2>
-    <input type="text" name="picture"><br>
-    <button>ADD</button>
+      <div class="mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" class="form-control" id="name" name="name">
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <input type="text" class="form-control" id="description" name="description">
+      </div>
+
+     <div class="mb-3">
+        <label for="ingredients" class="form-label">Ingredients:</label>
+        <textarea class="form-control" id="ingredients" name="ingredients" rows="4" placeholder="Ingredient 1, Ingredient 2, Ingredient 3"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="how_to_make" class="form-label">How to Make:</label>
+        <textarea class="form-control" id="how_to_make" name="how_to_make" rows="4" placeholder="Step 1, Step 2, Step 3"></textarea>
+    </div>
 
 
-</form>
+      <div class="mb-3">
+        <label for="type_of_food" class="form-label">Type of Food:</label>
+        <input type="text" class="form-control" id="type_of_food" name="type_of_food">
+      </div>
+
+      <div class="mb-3">
+        <label for="nationality" class="form-label">Nationality:</label>
+        <input type="text" class="form-control" id="nationality" name="nationality">
+      </div>
+
+      <div class="mb-3">
+        <label for="mealType" class="form-label">Meal Type:</label>
+        <input type="text" class="form-control" id="mealType" name="mealType">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</body>
+</html>

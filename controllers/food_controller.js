@@ -128,6 +128,17 @@ const getHome = async (req, res) => {
     }
 };
 
+//Add food validation 
+const postFoodValidationRules = [
+    body('name').notEmpty().trim().escape(),
+    body('description').notEmpty().trim().escape(),
+    body('ingredients').notEmpty().isString().trim().escape(),
+    body('how_to_make').notEmpty().isString().trim().escape(),
+    body('type_of_food').notEmpty().trim().escape(),
+    body('nationality').notEmpty().trim().escape(),
+    body('mealType').notEmpty().trim().escape(),
+  ];
+
 //add a food
 
 const getAddFoodPage = (req, res) => {
@@ -136,7 +147,14 @@ const getAddFoodPage = (req, res) => {
 
 const postFood = async (req, res) => {
     try {
-        const newFood = new food_model(req.body);
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+        const { name, description, ingredients, how_to_make, type_of_food, nationality, mealType } = req.body;
+        const ingredientsArray = ingredients.split(',');
+        const howToMakeArray = how_to_make.split(',');
+        const newFood = new food_model({name, description, ingredients: ingredientsArray, how_to_make: howToMakeArray, type_of_food, nationality, mealType});
         await newFood.save();
         res.send("<h1>Food Added</h1>");
     } catch (error) {
@@ -265,5 +283,6 @@ module.exports = {
     getEditFoodPage, 
     searchFood, 
     addComment,
-    addCommentValidationRules
+    addCommentValidationRules,
+    postFoodValidationRules
 };
