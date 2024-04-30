@@ -226,7 +226,7 @@ const editFood = async (req, res) => {
             updatedFields.ingredients = ingredients.split(',').map(ingredient => ingredient.trim());
         }
         if (how_to_make) {
-            updatedFields.how_to_make = how_to_make.split(',').map(how_to_make => how_to_make.trim());
+            updatedFields.how_to_make = how_to_make.split('.').map(step => step.trim());
         }
 
         const currentFoodDetails = await food_model.findById(id);
