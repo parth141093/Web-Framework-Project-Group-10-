@@ -38,3 +38,22 @@ function scrollFunction() {
         backToTopBtn.style.display = "none";
     }
 }
+
+// dark/light theme
+
+document.addEventListener('DOMContentLoaded', function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    console.log(themeToggle); 
+    const body = document.body;
+
+    if (localStorage.getItem('dark-theme') === 'true') {
+        body.classList.add('dark-theme');
+    }
+
+    themeToggle.addEventListener('click', function() {
+        console.log("Toggle clicked"); 
+        const isDark = body.classList.toggle('dark-theme');
+        console.log("Is dark theme?", isDark); 
+        localStorage.setItem('dark-theme', isDark);
+    });
+});

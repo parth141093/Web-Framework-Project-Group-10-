@@ -2,6 +2,12 @@ body {
     background-color: white;
     color: black;
     font-family: Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme {
+    background-color: black;
+    color: white;
 }
 
 a {
@@ -190,4 +196,166 @@ body {
 }
 .button-black:hover, button:hover {
     background-color: grey;
+}
+
+/* search button */
+
+.btn-outline-success {
+    color: white;      
+    background-color: transparent;  
+    border: 2px solid white !important;       
+    transition: all 0.3s ease;      
+  }
+  
+  .btn-outline-success:hover, .btn-outline-success:focus {
+    color: black !important;                
+    background-color: white !important;    
+    border-color: white !important;         
+  }
+  
+  .btn-outline-success i {
+    color: white; 
+  }
+  
+  .btn-outline-success:hover i, .btn-outline-success:focus i {
+    color: black !important; 
+  }
+  
+/* Dark theme */
+
+.theme-toggle-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+    height: fit-content;
+}
+
+.theme-toggle-button:focus {
+    outline: none;
+}
+
+.theme-toggle-button:hover, .theme-toggle-button:focus {
+    background: none;
+}
+
+body.dark-theme {
+    background-color: #121212; 
+    color: #E0E0E0; 
+}
+
+body.dark-theme a {
+    color: #B0BEC5; 
+    text-decoration: underline; 
+}
+
+body.dark-theme h1, body.dark-theme h2, body.dark-theme h3 {
+    color: #FFFFFF; 
+}
+
+body.dark-theme .food-section,
+body.dark-theme .food-by-id-container,
+body.dark-theme .food-by-id-details,
+body.dark-theme .food-by-id-related {
+    background-color: #1E1E1E; 
+    border: 1px solid #333; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
+    padding: 20px; 
+}
+
+body.dark-theme .card-footer {
+    background-color: #2A2A2A; 
+}
+
+body.dark-theme .homepage-banner img {
+    opacity: 0.8; 
+}
+
+body.dark-theme .food-category-button, 
+body.dark-theme .button-black, 
+body.dark-theme button {
+    background-color: #333; 
+    color: #E0E0E0; 
+}
+
+body.dark-theme .food-category-button:hover,
+body.dark-theme .button-black:hover,
+body.dark-theme button:hover {
+    background-color: #555; 
+}
+
+body.dark-theme input, 
+body.dark-theme select, 
+body.dark-theme textarea {
+    background-color: #333; 
+    color: #E0E0E0; 
+    border: 1px solid #555; 
+}
+
+body.dark-theme .btn-outline-success {
+    color: #E0E0E0;      
+    background-color: transparent;  
+    border-color: #E0E0E0;       
+}
+
+body.dark-theme .btn-outline-success:hover, 
+body.dark-theme .btn-outline-success:focus {
+    color: #121212;                
+    background-color: #E0E0E0;    
+    border-color: #E0E0E0;         
+}
+
+body.dark-theme .btn-outline-success i {
+    color: #E0E0E0; 
+}
+
+body.dark-theme .btn-outline-success:hover i, 
+body.dark-theme .btn-outline-success:focus i {
+    color: #121212; 
+}
+
+body.dark-theme .navbar,
+body.dark-theme footer {
+    background-color: black; 
+    color: white;
+}
+
+body.dark-theme .card {
+    background-color: #1E1E1E; 
+    color: #E0E0E0; 
+    border: 1px solid #333; 
+}
+
+body.dark-theme .card-body,
+body.dark-theme .card-footer {
+    background-color: transparent; 
+    color: #FFFFFF;
+}
+
+body.dark-theme .card-footer .footer-content .text-muted,
+body.dark-theme .average-rating,
+body.dark-theme .meal-type {
+    color: #FFFFFF !important;
+}
+
+body.dark-theme .card-title,
+body.dark-theme .card-text {
+    color: inherit; 
+}
+
+body.dark-theme .food-card-link:hover .card {
+    background-color: #2A2A2A; 
+}
+
+body.dark-theme .card-img-top {
+    opacity: 0.9; 
+    transition: opacity 0.3s ease-in-out; 
+}
+
+body.dark-theme .card-img-top:hover {
+    opacity: 1; 
 }

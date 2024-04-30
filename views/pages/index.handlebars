@@ -4,9 +4,10 @@
   <img src="/assets/background/background.png" alt="Delicious food" style="width: 100%; height: auto; max-width: 1200px; max-height: 500px;">
 </div>
 
-<div class="highest-rated-food-container mt-5">
-  <h2 class="text-center mt-5">What do you feel like to eat today?</h2>
+<h2 class="text-center mt-5">What do you feel like to eat today?</h2>
   <h2 class="text-center">Here are our best recipes</h2>
+
+<div class="highest-rated-food-container mt-5">
   {{#each highestRatedFood as |food type|}}
     <div class="food-section mt-5">
       <a href="/food/{{food._id}}" class="food-section-link">

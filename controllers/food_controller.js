@@ -132,7 +132,8 @@ const rate = async (req, res) => {
 
         res.redirect(`/food/${id}`);
     } catch (error) {
-        res.status(500).json({success: false, message: "Something went wrong!"});
+        console.log(error)
+        res.status(500).json("Something went wrong! Please try again!");
     }
 };
 //next, find out the highest rated food by mealType and display them in Homepage
@@ -146,8 +147,8 @@ const getHome = async (req, res) => {
             }});
         res.render('pages/index', {highestRatedFood});
     }catch(error){
-        console.error(error);
-        res.status(500).json({success: false, message: "Something went wrong!"})
+        console.log(error)
+        res.status(500).json("Something went wrong! Please try again!");
     }
 };
 
