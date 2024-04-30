@@ -271,6 +271,7 @@ const searchFood = async (req, res) => {
 //Comment Validation code
 const addCommentValidationRules = [
     body('foodId').notEmpty().isMongoId(),
+    body('username').notEmpty().trim().isString().escape(),
     body('content').notEmpty().trim().isString().escape(),
   ];
 
@@ -281,8 +282,8 @@ const addComment = async (req, res) => {
       if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
       }
-      const { foodId, content } = req.body;
-      const comment = new Comment({ foodId, content });
+      const { foodId, username, content } = req.body;
+      const comment = new Comment({ foodId, username, content });
       await comment.save();
       res.redirect(`/food/${foodId}`);
     } catch (error) {
