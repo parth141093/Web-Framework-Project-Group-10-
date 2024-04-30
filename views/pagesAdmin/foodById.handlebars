@@ -80,7 +80,8 @@
         {{/each}}
     </ul>
     <form id="comment-form" action="food/comment/add" method="POST">
+        <input type="hidden" name="foodId" value="{{ food._id }}">
         <textarea name="content" rows="4" cols="50" placeholder="Write your comment here"></textarea>
-        <button class="button-black" type="submit">Submit</button>
+        <button type="submit">Submit</button>
     </form>
 </div>

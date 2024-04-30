@@ -85,7 +85,7 @@ const getFoodByIdUser = async (req, res) => {
                 averageRating: foodItem.averageRating
             };
         });
-        res.render('pagesUser/foodById', { food: foodData, relatedFoods: relatedFoodsData, comments: comments });
+        res.render('pagesUser/foodById', { food: foodData, relatedFoods: relatedFoodsData, comments: comments, foodId: foodId });
     }catch(error){
         console.error(error);
         res.status(500).json("Something went wrong! Please try again!");
@@ -108,7 +108,7 @@ const getFoodByIdAdmin = async (req, res) => {
                 averageRating: foodItem.averageRating
             };
         });
-        res.render('pagesAdmin/foodById', { food: foodData, relatedFoods: relatedFoodsData, comments: comments });
+        res.render('pagesAdmin/foodById', { food: foodData, relatedFoods: relatedFoodsData, comments: comments, foodId: foodId });
     }catch(error){
         console.error(error);
         res.status(500).json("Something went wrong! Please try again!");
@@ -268,7 +268,6 @@ const searchFood = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
-
 //Comment Validation code
 const addCommentValidationRules = [
     body('foodId').notEmpty().isMongoId(),
@@ -282,7 +281,6 @@ const addComment = async (req, res) => {
       if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
       }
-  
       const { foodId, content } = req.body;
       const comment = new Comment({ foodId, content });
       await comment.save();

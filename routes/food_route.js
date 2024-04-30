@@ -1,11 +1,17 @@
 const express = require('express');
 const food_controller = require('../controllers/food_controller');
 const router = express.Router();
+const { body, validationResult } = require('express-validator');
 
 router.get('/', food_controller.getHome);
 
 //Comment
-router.post('/food/comment/add', food_controller.addCommentValidationRules, food_controller.addComment);
+const addCommentValidationRules = [
+    body('foodId').notEmpty().isMongoId(),
+    body('content').notEmpty().isString().trim().escape(),
+  ];
+
+router.post('/food/comment/add', addCommentValidationRules, food_controller.addComment);
 
 // Search
 router.get('/food/search', food_controller.searchFood);
