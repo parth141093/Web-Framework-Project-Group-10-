@@ -263,7 +263,7 @@ const editFood = async (req, res) => {
 
         const updatedFields = { name, description, type_of_food, nationality, mealType };
 
-        // Convert ingredients and how_to_make to arrays if they are provided as comma-separated strings
+        // Convert ingredients and how_to_make to arrays
         if (ingredients) {
             updatedFields.ingredients = ingredients.split(',').map(ingredient => ingredient.trim());
         }
