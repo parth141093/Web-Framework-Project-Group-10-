@@ -1,51 +1,81 @@
 <div class="food-by-id-container">
   <div class="food-by-id-details">
-    <h1 class="food-name">{{ food.name }}</h1>
-    <div class="food-categories">
-        <a href="/food/type/{{ food.type_of_food }}" class="food-category-link">
-            <button class="food-category-button">{{ food.type_of_food }}</button>
-        </a>
-        <a href="/food/meal-type/{{ food.mealType }}" class="food-category-link">
-            <button class="food-category-button">{{ food.mealType }}</button>
-        </a>
-    </div>
-    <div class="food-by-id-detail picture mt-5">
-        <img src="/assets/images/{{ food.picture }}.png" alt="{{ food.name }}">
-    </div>
-    <div class="food-by-id-detail mt-3">
-        <h3>Nationality</h3>
-        <p>{{ food.nationality }}</p>
-    </div>
-    <div class="food-by-id-detail">
-        <h3>Ingredients</h3>
-        <ul>
-            {{#each food.ingredients}}
-            <li>{{ this }}</li>
-            {{/each}}
-        </ul>
-    </div>
-    <div class="food-by-id-detail">
-        <h3>How to Make</h3>
-        <ol>
-            {{#each food.how_to_make}}
-            <li>{{ this }}</li>
-            {{/each}}
-        </ol>
-    </div>
-    <div class="food-by-id-detail">
-        <h3>Rating</h3>
-        <p>{{toFixed food.averageRating 2}} ★★★★★</p>
-        <form id="rating-form" action="/food/{{food._id}}/rate" method="POST">
-            <select name="rating" id="rating">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-            <button class="button-black" type="submit">Submit Rating</button>
-        </form>
-    </div>
+        <h1 class="food-name">{{ food.name }}</h1>
+        <div class="food-categories">
+            <a href="/food/type/{{ food.type_of_food }}" class="food-category-link">
+                <button class="food-category-button">{{ food.type_of_food }}</button>
+            </a>
+            <a href="/food/meal-type/{{ food.mealType }}" class="food-category-link">
+                <button class="food-category-button">{{ food.mealType }}</button>
+            </a>
+        </div>
+        <div class="food-by-id-detail picture mt-5">
+            <img src="/assets/images/{{ food.picture }}.png" alt="{{ food.name }}">
+        </div>
+        <div class="food-by-id-detail mt-3">
+            <h3>Nationality</h3>
+            <p>{{ food.nationality }}</p>
+        </div>
+        <div class="food-by-id-detail">
+            <h3>Ingredients</h3>
+            <ul>
+                {{#each food.ingredients}}
+                <li>{{ this }}</li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="food-by-id-detail">
+            <h3>How to Make</h3>
+            <ol>
+                {{#each food.how_to_make}}
+                <li>{{ this }}</li>
+                {{/each}}
+            </ol>
+        </div>
+        <div class="food-by-id-detail">
+            <h3>Rating</h3>
+            <p>{{toFixed food.averageRating 2}} ★★★★★</p>
+            <form id="rating-form" action="/food/{{food._id}}/rate" method="POST">
+                <select name="rating" id="rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <button class="button-black" type="submit">Submit Rating</button>
+            </form>
+        </div>
+        <div class="comments-section mt-4">
+            <h2>Comments ({{comments.length}})</h2>
+                <ul class="list-group mb-3">
+                {{#each comments}}
+                    <li class="list-group-item">
+                        <strong>{{this.username}}:</strong> {{this.content}}
+                    </li>
+                {{/each}}
+                </ul>
+                <form id="comment-form" action="/food/comment/add" method="POST">
+                <input type="hidden" name="foodId" value="{{ food._id }}">
+                <h3>Let's us know your opinion</h3>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="username" placeholder="Your Username" required>
+                    <div class="invalid-feedback">
+                        Please enter a username.
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <textarea class="form-control" name="content" rows="4" placeholder="Write your comment here" required></textarea>
+                    <div class="invalid-feedback">
+                        Please write something for your comment.
+                    </div>
+                </div>
+                
+                <button class="button-black" type="submit">Submit Comment</button>
+                </form>
+        </div>
+
     </div>
 
     <div class="food-by-id-related">
@@ -76,17 +106,3 @@
     </div>
 </div>
 
-<div class="comments-section">
-    <h2>Comments ({{comments.length}})</h2>
-    <ul>
-        {{#each comments}}
-            <li><strong>{{this.username}}:</strong> {{this.content}}</li>
-        {{/each}}
-    </ul>
-    <form id="comment-form" action="food/comment/add" method="POST">
-        <input type="hidden" name="foodId" value="{{ food._id }}">
-        <input type="text" name="username" placeholder="Your Username">
-        <textarea name="content" rows="4" cols="50" placeholder="Write your comment here"></textarea>
-        <button class="button-black" type="submit">Submit</button>
-    </form>
-</div>

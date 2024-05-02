@@ -6,8 +6,9 @@ const { body, validationResult } = require('express-validator');
 
 const app = express();
 
-const dbURI = 'mongodb+srv://'+process.env.DBUSERNAME+':'+process.env.DBPASSWORD+'@'+process.env.CLUSTER+'.mongodb.net/'+process.env.DB+'?retryWrites=true&w=majority';
-mongoose.connect(dbURI);
+mongoose.connect(`mongodb+srv://${process.env.DBUSERNAME}:${process.env.DBPASSWORD}@${process.env.CLUSTER}.mongodb.net/${process.env.DB}?retryWrites=true&w=majority`)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
 const food_model = require('../models/food_model');
 const Comment = require('../models/comment_model');
 
@@ -166,7 +167,7 @@ const postFoodValidationRules = [
 //add a food
 
 const getAddFoodPage = (req, res) => {
-    res.render('add-food-page');
+    res.render('pages/add-food-page');
 };
 
 const postFood = async (req, res) => {
@@ -206,7 +207,7 @@ const deleteFood = async (req, res) => {
 const getEditFoodPage = async (req, res) => {
     try {
         const food = await food_model.findById(req.params.id);
-        res.render('pages/editFood', { food });
+        res.render('pagesAdmin/editFood', { food });
     } catch (error) {
         res.status(500).send("Failed to get the food for edit.");
     }
@@ -292,6 +293,15 @@ const addComment = async (req, res) => {
     }
   };
 
+//chat 
+const chat = async (req, res) => {
+    try {
+        res.render('pages/chatapp');
+    } catch (error) {
+        res.status(500).send("Failed to get to chatbox.");
+    }
+};
+
 module.exports = {
     getHome, 
     getAllFood, 
@@ -308,5 +318,6 @@ module.exports = {
     searchFood, 
     addComment,
     addCommentValidationRules,
-    postFoodValidationRules
+    postFoodValidationRules,
+    chat
 };

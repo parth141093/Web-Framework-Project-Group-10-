@@ -149,6 +149,11 @@ body {
     text-align: center;
     margin-top: 20px;
 }
+
+.chat {
+    text-align: center;
+    margin-top: 20px;
+}
 /* home page banner*/
 .homepage-banner img {
     width: 100%;  
@@ -164,11 +169,11 @@ body {
     background-color: black;
     color: white;
     border: none;
-    padding: 5px 10px; /* Smaller padding for smaller buttons */
-    font-size: 12px; /* Smaller font size */
+    padding: 5px 10px; 
+    font-size: 12px; 
     cursor: pointer;
     margin-right: 10px;
-    border-radius: 0px; /* Square corners */
+    border-radius: 0px; 
 }
 .food-category-button:hover {
     background-color: grey;
@@ -358,4 +363,60 @@ body.dark-theme .card-img-top {
 
 body.dark-theme .card-img-top:hover {
     opacity: 1; 
+}
+
+/* chatapp */
+.chatapp {
+    font-family: Arial, sans-serif; 
+    background: #f4f4f4; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+#messages {
+    list-style-type: none; 
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    background: white;
+    padding: 10px;
+    border: 1px solid #ccc; 
+    margin-bottom: 10px;
+}
+
+#messages li {
+    padding: 8px;
+    margin-bottom: 2px;
+    background: #f9f9f9; 
+    border-bottom: 1px solid #eee; 
+}
+
+#chat-form {
+    display: flex;
+    width: 300px;
+}
+
+#chat-mes {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+}
+
+#send-chat {
+    padding: 8px 15px;
+    background: #007bff; 
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#send-chat:hover {
+    background: #0056b3;
+}
+
+.title {
+    margin-top: 20px; 
 }

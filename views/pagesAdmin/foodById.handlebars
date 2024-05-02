@@ -1,47 +1,55 @@
 <div class="food-by-id-container">
   <div class="food-by-id-details">
-    <h1 class="food-name">{{ food.name }}</h1>
-    <div class="food-categories">
-        <a href="/food/type/{{ food.type_of_food }}" class="food-category-link">
-            <button class="food-category-button">{{ food.type_of_food }}</button>
-        </a>
-        <a href="/food/meal-type/{{ food.mealType }}" class="food-category-link">
-            <button class="food-category-button">{{ food.mealType }}</button>
-        </a>
-    </div>
-    <div class="food-by-id-detail picture mt-5">
-        <img src="/assets/images/{{ food.picture }}.png" alt="{{ food.name }}">
-    </div>
-    <div class="food-by-id-detail mt-3">
-        <h3>Nationality</h3>
-        <p>{{ food.nationality }}</p>
-    </div>
-    <div class="food-by-id-detail">
-        <h3>Ingredients</h3>
-        <ul>
-            {{#each food.ingredients}}
-            <li>{{ this }}</li>
-            {{/each}}
-        </ul>
-    </div>
-    <div class="food-by-id-detail">
-        <h3>How to Make</h3>
-        <ol>
-            {{#each food.how_to_make}}
-            <li>{{ this }}</li>
-            {{/each}}
-        </ol>
-    </div>
-    <div class="food-by-id-detail">
-        <h3>Rating</h3>
-        <p>{{toFixed food.averageRating 2}} ★★★★★</p>
-    </div>
-        <form action="/food/edit/{{food._id}}" method="get">
-            <button class="button-black" type="submit">Edit</button>
-        </form>
-        <form action="/food/delete/{{food._id}}" method="post">
-            <button class="button-black" type="submit">Delete</button>
-        </form>
+        <h1 class="food-name">{{ food.name }}</h1>
+        <div class="food-categories">
+            <a href="/food/type/{{ food.type_of_food }}" class="food-category-link">
+                <button class="food-category-button">{{ food.type_of_food }}</button>
+            </a>
+            <a href="/food/meal-type/{{ food.mealType }}" class="food-category-link">
+                <button class="food-category-button">{{ food.mealType }}</button>
+            </a>
+        </div>
+        <div class="food-by-id-detail picture mt-5">
+            <img src="/assets/images/{{ food.picture }}.png" alt="{{ food.name }}">
+        </div>
+        <div class="food-by-id-detail mt-3">
+            <h3>Nationality</h3>
+            <p>{{ food.nationality }}</p>
+        </div>
+        <div class="food-by-id-detail">
+            <h3>Ingredients</h3>
+            <ul>
+                {{#each food.ingredients}}
+                <li>{{ this }}</li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="food-by-id-detail">
+            <h3>How to Make</h3>
+            <ol>
+                {{#each food.how_to_make}}
+                <li>{{ this }}</li>
+                {{/each}}
+            </ol>
+        </div>
+        <div class="food-by-id-detail">
+            <h3>Rating</h3>
+            <p>{{toFixed food.averageRating 2}} ★★★★★</p>
+        </div>
+            <form action="/food/edit/{{food._id}}" method="get">
+                <button class="button-black" type="submit">Edit</button>
+            </form>
+            <form action="/food/delete/{{food._id}}" method="post">
+                <button class="button-black" type="submit">Delete</button>
+            </form>
+            <div class="comments-section">
+                <h2>Comments ({{comments.length}})</h2>
+                <ul>
+                {{#each comments}}
+                    <li><strong>{{this.username}}:</strong> {{this.content}}</li>
+                {{/each}}
+                </ul>
+            </div>
     </div>
 
     <div class="food-by-id-related">
@@ -72,17 +80,3 @@
     </div>
 </div>
 
-<div class="comments-section">
-    <h2>Comments ({{comments.length}})</h2>
-    <ul>
-        {{#each comments}}
-            <li><strong>{{this.username}}:</strong> {{this.content}}</li>
-        {{/each}}
-    </ul>
-    <form id="comment-form" action="food/comment/add" method="POST">
-        <input type="hidden" name="foodId" value="{{ food._id }}">
-        <input type="text" name="username" placeholder="Your Username">
-        <textarea name="content" rows="4" cols="50" placeholder="Write your comment here"></textarea>
-        <button type="submit">Submit</button>
-    </form>
-</div>

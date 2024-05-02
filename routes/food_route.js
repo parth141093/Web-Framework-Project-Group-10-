@@ -32,4 +32,7 @@ router.post('/edit/:id', food_controller.editFood);
 // Delete
 router.post('/food/delete/:id', food_controller.deleteFood);
 
+// Chat
+router.get('/chat', food_controller.chat);
+
 module.exports = router;
