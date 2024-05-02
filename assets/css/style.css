@@ -420,3 +420,22 @@ body.dark-theme .card-img-top:hover {
 .title {
     margin-top: 20px; 
 }
+
+.navbar-brand {
+    margin-right: auto;
+}
+
+.navbar-nav {
+    margin-left: auto; 
+}
+
+.navbar-nav .nav-link {
+    color: white;
+}
+
+.theme-toggle-button {
+    margin-right: 20px;
+  }
+.d-flex {
+    margin-bottom: auto;
+}
