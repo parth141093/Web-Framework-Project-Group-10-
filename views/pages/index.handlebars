@@ -11,7 +11,7 @@
   {{#each highestRatedFood as |food type|}}
     <div class="food-section mt-5">
       <a href="/food/{{food._id}}" class="food-section-link">
-        <img src="/assets/images/{{food.picture}}.png" alt="Image of {{food.name}}" class="food-image">
+        <img src="/assets/images/{{food.picture}}" alt="Image of {{food.name}}" class="food-image">
         <div class="food-content">
           <span class="homepage-meal-type">{{type}}</span>
           <h3 class="food-name">{{food.name}}</h3>

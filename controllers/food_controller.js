@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const { emailTypeEnum, sendEmail } = require('./send_email');
 require('dotenv').config();
 const { body, validationResult } = require('express-validator');
+const multer = require('multer');
+const path = require('path');
 
 const app = express();
 
@@ -20,7 +22,7 @@ const getAllFood = async (req, res) => {
             title: "Eat what today?",
             foods: foods.map(doc => {
                 const food = doc.toJSON();
-                food.imageUrl = `/assets/images/${food.picture}.png`;
+                food.imageUrl = `/assets/images/${food.picture}`;
                 return food;
             })
         });
@@ -39,9 +41,8 @@ const getAllFoodByType = async (req, res) => {
             title: `Here are our great ${type_of_food} recipes`,
             foods: foods.map(doc => {
                 const food = doc.toJSON();
-                food.imageUrl = `/assets/images/${food.picture}.png`;
+                food.imageUrl = `/assets/images/${food.picture}`;
                 return food;
-                
             })
         });
     } catch (error) {
@@ -59,7 +60,7 @@ const getAllFoodByMealType = async (req, res) => {
             title: `Here are our great ${mealType} recipes`,
             foods: foods.map(doc => {
                 const food = doc.toJSON();
-                food.imageUrl = `/assets/images/${food.picture}.png`;
+                food.imageUrl = `/assets/images/${food.picture}`;
                 return food;
                 
             })
@@ -77,13 +78,13 @@ const getFoodByIdUser = async (req, res) => {
         const food = await food_model.findById(foodId);
         const comments = await Comment.find({ foodId: foodId }).exec();
         const foodData = food.toJSON();
-        foodData.imageUrl = `/assets/images/${foodData.picture}.png`;
+        foodData.imageUrl = `/assets/images/${foodData.picture}`;
         const relatedFoods = await food_model.find({ type_of_food: food.type_of_food, _id: { $ne: foodId } });
         const relatedFoodsData = relatedFoods.map(foodItem => {
             return {
                 ...foodItem.toJSON(),
-                imageUrl: `/assets/images/${foodItem.picture}.png`,
-                averageRating: foodItem.averageRating
+                imageUrl: `/assets/images/${foodItem.picture}`,
+                averageRating: foodItem.averageRating,
             };
         });
         res.render('pagesUser/foodById', { food: foodData, relatedFoods: relatedFoodsData, comments: comments, foodId: foodId });
@@ -100,12 +101,12 @@ const getFoodByIdAdmin = async (req, res) => {
         const food = await food_model.findById(foodId);
         const comments = await Comment.find({ foodId: foodId }).exec();
         const foodData = food.toJSON();
-        foodData.imageUrl = `/assets/images/${foodData.picture}.png`;
+        foodData.imageUrl = `/assets/images/${foodData.picture}`;
         const relatedFoods = await food_model.find({ type_of_food: food.type_of_food, _id: { $ne: foodId } });
         const relatedFoodsData = relatedFoods.map(foodItem => {
             return {
                 ...foodItem.toJSON(),
-                imageUrl: `/assets/images/${foodItem.picture}.png`,
+                imageUrl: `/assets/images/${foodItem.picture}`,
                 averageRating: foodItem.averageRating
             };
         });
@@ -125,12 +126,10 @@ const rate = async (req, res) => {
         const food = await food_model.findById(id);
         const updatedRatings = [...food.ratings, parseInt(rating)];
         const averageRating = updatedRatings.reduce((acc, curr) => acc + curr, 0) / updatedRatings.length;
-
         await food_model.findByIdAndUpdate(id, {
             $push: { ratings: rating },
             $set: { averageRating: averageRating }
         }, { new: true });
-
         res.redirect(`/food/${id}`);
     } catch (error) {
         console.log(error)
@@ -153,15 +152,40 @@ const getHome = async (req, res) => {
     }
 };
 
+//save pic to the exsisted storage
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'assets/images/');
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname); 
+    }
+});
+
+
+//make sure that pic is png file
+const upload = multer({ 
+    storage: storage,
+    fileFilter: function(req, file, cb){
+        if (file.mimetype === "image/png") {
+            cb(null, true);
+        } else {
+            cb(new Error("Only .png files are allowed!"), false);
+        }
+    }
+}).single('picture');
+
 //Add food validation 
 const postFoodValidationRules = [
-    body('name').notEmpty().trim().escape(),
-    body('description').notEmpty().trim().escape(),
-    body('ingredients').notEmpty().isString().trim().escape(),
-    body('how_to_make').notEmpty().isString().trim().escape(),
-    body('type_of_food').notEmpty().trim().escape(),
-    body('nationality').notEmpty().trim().escape(),
-    body('mealType').notEmpty().trim().escape(),
+    // body('name').notEmpty().trim().escape().withMessage('Name is required.'),
+    // body('description').notEmpty().trim().escape().withMessage('Description is required.'),
+    // body('ingredients').notEmpty().trim().escape().withMessage('Ingredients are required.'),
+    // body('how_to_make').notEmpty().trim().escape().withMessage('How to make is required.'),
+    // body('type_of_food').notEmpty().withMessage('Type of food is required.')
+    //   .isIn(['Fine Dining', 'Street Food', 'Vegan', 'Fried', 'Beverage']).withMessage('Invalid type of food selected.'),
+    // body('nationality').notEmpty().trim().escape().withMessage('Nationality is required.'),
+    // body('mealType').notEmpty().withMessage('Meal type is required.')
+    //   .isIn(['main', 'appetizer', 'side', 'dessert', 'drink']).withMessage('Invalid meal type selected.'),
   ];
 
 //add a food
@@ -171,21 +195,38 @@ const getAddFoodPage = (req, res) => {
 };
 
 const postFood = async (req, res) => {
-    try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+    upload(req, res, async (error) => {
+        if (error) {
+            return res.status(400).send("Error uploading file: " + error.message);
+        }
+        
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
         const { name, description, ingredients, how_to_make, type_of_food, nationality, mealType } = req.body;
-        const ingredientsArray = ingredients.split(',');
-        const howToMakeArray = how_to_make.split(',');
-        const newFood = new food_model({name, description, ingredients: ingredientsArray, how_to_make: howToMakeArray, type_of_food, nationality, mealType});
-        await newFood.save();
-        res.send("<h1>Food Added</h1>");
-    } catch (error) {
-        res.status(500).send("Error adding food: " + error.message);
-    }
+        const filename = req.file ? path.basename(req.file.path) : 'veganChicken.png';
+        const newFood = new food_model({
+            name,
+            description,
+            ingredients,  
+            how_to_make,  
+            type_of_food,
+            nationality,
+            mealType,
+            picture: filename 
+        });
+
+        try {
+            await newFood.save();
+            res.send("<h1>Food Added Successfully</h1>");
+        } catch (err) {
+            res.status(500).send("Error adding food: " + err.message);
+        }
+    });
 };
+
 
 //delete
 const deleteFood = async (req, res) => {
@@ -259,7 +300,7 @@ const searchFood = async (req, res) => {
         const foods = await food_model.find({ $text: { $search: searchTerm } });
         const foodsWithImage = foods.map(doc => {
             const food = doc.toJSON();
-            food.imageUrl = `/assets/images/${food.picture}.png`;
+            food.imageUrl = `/assets/images/${food.picture}`;
             return food;
         });
 

@@ -8,31 +8,31 @@ router.get('/', food_controller.getHome);
 //Comment
 router.post('/food/comment/add', food_controller.addCommentValidationRules, food_controller.addComment);
 
-// Search
+//Search
 router.get('/food/search', food_controller.searchFood);
 
-// Add
+//Add
 router.get('/food/add', food_controller.getAddFoodPage);
-router.post('/food', food_controller.postFoodValidationRules, food_controller.postFood);
+router.post('/food/add', food_controller.postFoodValidationRules, food_controller.postFood);
 
-// List
+//List
 router.get('/food', food_controller.getAllFood);
 router.get('/food/type/:type_of_food', food_controller.getAllFoodByType);
 router.get('/food/:id', food_controller.getFoodByIdUser);
 router.get('/admin/food/:id', food_controller.getFoodByIdAdmin);
 router.get('/food/meal-type/:mealType', food_controller.getAllFoodByMealType);
 
-// Rate
+//Rate
 router.post('/food/:id/rate', food_controller.rate);
 
-// Edit
+//Edit
 router.get('/food/edit/:id', food_controller.getEditFoodPage);
 router.post('/edit/:id', food_controller.editFood);
 
-// Delete
+//Delete
 router.post('/food/delete/:id', food_controller.deleteFood);
 
-// Chat
+//Chat
 router.get('/chat', food_controller.chat);
 
 module.exports = router;
