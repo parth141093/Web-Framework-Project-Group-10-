@@ -1,9 +1,13 @@
+<header>
 <h1 class="text-center mt-5"><strong>Welcome to group 10's food blog!</strong></h1>
+</header>
 
-<div class="homepage-banner mt-5">
+<main>
+<section class="homepage-banner mt-5">
   <img src="/assets/background/background.png" alt="Delicious food" style="width: 100%; height: auto; max-width: 1200px; max-height: 500px;">
-</div>
+</section>
 
+<nav role="navigation">
 <h2 class="text-center mt-5">What do you feel like to eat today?</h2>
   <h2 class="text-center">Here are our best recipes</h2>
 
@@ -22,15 +26,27 @@
     </div>
   {{/each}}
 </div>
+</nav>
+
+<section>
 <h2 class="text-center mt-5">Have an awesome recipe to share with us?</h2>
 <div class="add-a-food">
-  <a href="/food/add" class="button-black">Share A Food</a>
+  <a href="/food/add" class="button-black" role="button">Share A Food</a>
 </div>
+</section>
+
+<section>
 <h2 class="text-center mt-5">Let's talk with other food lovers!</h2>
 <div class="chat">
-  <a href="/chat" class="button-black">Chat</a>
+  <a href="/chat" class="button-black" role="button">Chat</a>
 </div>
+</section>
+
+<section>
 <h2 class="text-center mt-5">Discover all the magnificent food</h2>
 <div class="view-all-foods">
-  <a href="/food" class="button-black">View All Foods</a>
+  <a href="/food" class="button-black" role="button">View All Foods</a>
 </div>
+</section>
+
+</main>
