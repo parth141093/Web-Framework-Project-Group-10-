@@ -8,8 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 method: 'POST',
                 body: new FormData(this),
                 headers: {
-                    'Accept': 'application/json',
-                    'api-key': 'handsome'
+                    'Accept': 'application/json'
                 }
             });
 
@@ -22,16 +21,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         };
     }
-
-    //backtotop btn
-    window.onscroll = function() {
-        var backToTopBtn = document.getElementById("backToTopBtn");
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            backToTopBtn.style.display = "block";
-        } else {
-            backToTopBtn.style.display = "none";
-        }
-    };
 
     //dark/light btn
     const themeToggle = document.getElementById('theme-toggle');
@@ -48,3 +37,19 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+function backToTop() {
+    document.body.scrollTop = 0; // safari
+    document.documentElement.scrollTop = 0; 
+}
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    var backToTopBtn = document.getElementById("backToTopBtn");
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        backToTopBtn.style.display = "block";
+    } else {
+        backToTopBtn.style.display = "none";
+    }
+}
