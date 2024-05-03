@@ -3,50 +3,50 @@
 </header>
 
 <main>
-<section class="homepage-banner mt-5">
-  <img src="/assets/background/background.png" alt="Delicious food" style="width: 100%; height: auto; max-width: 1200px; max-height: 500px;">
+<section class="homepage-banner mt-5" aria-label="homepage banner">
+  <img src="/assets/background/background.png" alt="A banner showing various delicious foods to inspire your next meal" style="width: 100%; height: auto; max-width: 1200px; max-height: 500px;">
 </section>
 
-<nav role="navigation">
-<h2 class="text-center mt-5">What do you feel like to eat today?</h2>
+<nav role="navigation" aria-label="highest rated foods navigation">
+  <h2 class="text-center mt-5">What do you feel like to eat today?</h2>
   <h2 class="text-center">Here are our best recipes</h2>
 
-<div class="highest-rated-food-container mt-5">
-  {{#each highestRatedFood as |food type|}}
-    <div class="food-section mt-5">
-      <a href="/food/{{food._id}}" class="food-section-link">
-        <img src="/assets/images/{{food.picture}}" alt="Image of {{food.name}}" class="food-image">
-        <div class="food-content">
-          <span class="homepage-meal-type">{{type}}</span>
-          <h3 class="food-name">{{food.name}}</h3>
-          <p>{{food.description}}</p>
-          <p class="food-rating">Rating: {{toFixed food.averageRating 2}} ★★★★★</p>
-        </div>
-      </a>
-    </div>
-  {{/each}}
-</div>
+  <div class="highest-rated-food-container mt-5" aria-label="highest rated foods">
+    {{#each highestRatedFood as |food type|}}
+      <section class="food-section mt-5" aria-labelledby="food-name-{{food._id}}">
+        <a href="/food/{{food._id}}" class="food-section-link">
+          <img src="/assets/images/{{food.picture}}" alt="Image of {{food.name}}" class="food-image">
+          <div class="food-content">
+            <span class="homepage-meal-type">{{type}}</span>
+            <h3 id="food-name-{{food._id}}" class="food-name">{{food.name}}</h3>
+            <p>{{food.description}}</p>
+            <p class="food-rating">Rating: {{toFixed food.averageRating 2}} stars</p>
+          </div>
+        </a>
+    </section>
+    {{/each}}
+  </div>
 </nav>
 
-<section>
-<h2 class="text-center mt-5">Have an awesome recipe to share with us?</h2>
-<div class="add-a-food">
-  <a href="/food/add" class="button-black" role="button">Share A Food</a>
-</div>
+<section aria-label="share a recipe">
+  <h2 class="text-center mt-5">Have an awesome recipe to share with us?</h2>
+  <div class="add-a-food">
+    <a href="/food/add" class="button-black" role="button" aria-label="share a food recipe">Share A Food</a>
+  </div>
 </section>
 
-<section>
-<h2 class="text-center mt-5">Let's talk with other food lovers!</h2>
-<div class="chat">
-  <a href="/chat" class="button-black" role="button">Chat</a>
-</div>
+<section aria-label="food lover live chat">
+  <h2 class="text-center mt-5">Let's talk with other food lovers!</h2>
+  <div class="chat">
+    <a href="/chat" class="button-black" role="button" aria-label="join food lovers chat">Chat</a>
+  </div>
 </section>
 
-<section>
-<h2 class="text-center mt-5">Discover all the magnificent food</h2>
-<div class="view-all-foods">
-  <a href="/food" class="button-black" role="button">View All Foods</a>
-</div>
+<section aria-label="view all foods">
+  <h2 class="text-center mt-5">Discover all the magnificent food</h2>
+  <div class="view-all-foods">
+    <a href="/food" class="button-black" role="button" aria-label="view all foods">View All Foods</a>
+  </div>
 </section>
 
 </main>
